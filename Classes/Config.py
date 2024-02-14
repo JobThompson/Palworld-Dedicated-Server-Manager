@@ -5,6 +5,21 @@ class Config:
     def __init__(self):
         self.config_directory = self.get_or_create_config_directory()
         self.config_file_path= os.path.join(self.config_directory, "config.json")
+        
+        self.arrcon_exe_path = '../ARRCON/ARRCON.exe'
+        self.palworld_directory = None
+        
+        self.rcon_getport = None # rcon_port.cget("text")
+        self.rcon_pass = None # re.search(r'AdminPassword="([^"]*)",', file_content).group(1)
+        self.server_start_args = None # server_start_args_entry.get()
+        self.arrcon_command_save_server = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "save"'
+        self.arrcon_command_info_server = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "info"'
+        self.arrcon_command_shutdown_server = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "shutdown 60 The_server_will_be_restarting_in_60_seconds"'
+        self.arrcon_command_server_message_30 = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "broadcast The_server_will_be_restarting_in_30_seconds"'
+        self.arrcon_command_server_message_10 = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "broadcast The_server_will_be_restarting_in_10_seconds"'
+        self.start_server_command = f'{self.palworld_directory}/PalServer.exe {self.server_start_args}'
+        self.shutdown_server_command = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "shutdown 5 The_server_will_be_shutting_down_in_5_seconds"'
+        self.force_shutdown_server_command = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "doexit"'
 
         self.restart_entry = None
         self.restart_schedule_entry = None
