@@ -73,6 +73,7 @@ def load_settings():
 
 #Save settings when exiting app
 def on_exit():
+    """When you click to exit the app, this function is called"""
     save_settings()
     root.destroy()
 

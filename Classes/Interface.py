@@ -4,7 +4,9 @@ from Classes.Config import config_object
 
 class Interface:
     """Class that handles the TKinter interface for the server manager"""
-    def __init__(self) -> None:
+    def __init__(self, email_handler) -> None:
+        self.email_handler = email_handler
+
         self.root = Tk()
         self.mainframe = None
         self.tab_control = None
@@ -18,12 +20,16 @@ class Interface:
         self.config_optional_config_in_main_tab()
         self.config_server_functions_in_main_tab()
         self.config_server_info_in_main_tab()
+        self.config_palworld_ini_in_server_config_tab()
+        self.configure_server_configuration_in_server_configure_tab()
+        self.configure_email_configuration_in_alerts_tab()
+        self.configure_discord_configuration_in_alerts_tab()
+        self.configure_about_tab()
         self.create_output_window()
         self.set_exit_conditions()
         config_object.load_config()
-        self.start_mainloop()
 
-
+ 
     def set_favicon(self, icon_path):
         """Sets the favicon for the main window"""
         try:
@@ -61,6 +67,7 @@ class Interface:
         self.about_tab.columnconfigure(0, weight=1)
 
 
+    """ Main Tab Configuration """
     def config_interval_configuration_in_main_tab(self):
         """Configures the interval configuration section of the main tab"""
         main_interval_frame = LabelFrame(self.main_tab, text="Interval Configuration")
@@ -264,8 +271,212 @@ class Interface:
             command="server_status_info"
         )
         update_info_button.grid(column=0, row=3, columnspan=2, sticky=N)
+        
+    """ Server Config Tab Configuration """
+    def config_palworld_ini_in_server_config_tab(self):
+        """Configures the PalWorldSettings.ini section of the server config tab"""
+        server_info_frame = LabelFrame(self.server_config_tab, text="PalWorldSettings.ini")
+        server_info_frame.grid(column=0, row=0, padx=10, pady=10)
+
+        server_name_label = ttk.Label(server_info_frame, text="Server Name:")
+        server_name_label.grid(column=0, row=0, sticky=W, padx=10)
+
+        server_name = ttk.Label(server_info_frame, text="-")
+        server_name.grid(column=0, row=1, sticky=W, padx=10)
+
+        server_description_label = ttk.Label(server_info_frame, text="Server Description:")
+        server_description_label.grid(column=0, row=2, sticky=W, padx=10)
+
+        server_description = ttk.Label(server_info_frame, text="-")
+        server_description.grid(column=0, row=3, sticky=W, padx=10)
+
+        server_password_label = ttk.Label(server_info_frame, text="Server Password:")
+        server_password_label.grid(column=0, row=4, sticky=W, padx=10)
+
+        server_password = ttk.Label(server_info_frame, text="-")
+        server_password.grid(column=0, row=5, sticky=W, padx=10)
+
+        max_players_label = ttk.Label(server_info_frame, text="Max Players:")
+        max_players_label.grid(column=1, row=0, sticky=W, padx=10)
+
+        max_players = ttk.Label(server_info_frame, text="-")
+        max_players.grid(column=1, row=1, sticky=W, padx=10)
+
+        server_port_label = ttk.Label(server_info_frame, text="Server Port:")
+        server_port_label.grid(column=1, row=2, sticky=W, padx=10)
+
+        server_port = ttk.Label(server_info_frame, text="-")
+        server_port.grid(column=1, row=3, sticky=W, padx=10)
+
+        rcon_port_label = ttk.Label(server_info_frame, text="RCON Port:")
+        rcon_port_label.grid(column=2, row=0, sticky=W, padx=10)
+
+        rcon_port = ttk.Label(server_info_frame, text="-")
+        rcon_port.grid(column=2, row=1, sticky=W, padx=10)
+
+        rcon_state_label = ttk.Label(server_info_frame, text="RCON Enabled:")
+        rcon_state_label.grid(column=2, row=2, sticky=W, padx=10)
+
+        rcon_state = ttk.Label(server_info_frame, text="-")
+        rcon_state.grid(column=2, row=3, sticky=W, padx=10)
+
+        rcon_password_label = ttk.Label(server_info_frame, text="RCON Password:")
+        rcon_password_label.grid(column=2, row=4, sticky=W, padx=10)
+
+        rcon_password = ttk.Label(server_info_frame, text="-")
+        rcon_password.grid(column=2, row=5, sticky=W, padx=10)
+
+        edit_server_config_button = ttk.Button(
+            server_info_frame, 
+            text="Edit PalWorldSettings.ini", 
+            command="lambda: open_ini_file(server_directory_selection.cget('text'))"
+        )
+        edit_server_config_button.grid(column=0, row=6, columnspan=3, padx=10, pady=10)
+    
+    def configure_server_configuration_in_server_configure_tab(self):
+        """Configures the server configuration section of the server config tab"""
+        server_config_frame = LabelFrame(self.server_config_tab, text="Server Configuration")
+        server_config_frame.grid(column=0, row=1, padx=10, pady=10)
+
+        server_directory_button = ttk.Button(server_config_frame, text="Select Palworld Directory:", command="select_palworld_directory")
+        server_directory_button.grid(column=0, row=0, padx=10, pady=10)
+
+        server_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        server_directory_selection.grid(column=1, row=0, sticky=W)
+
+        palworld_exe_result_label = ttk.Label(server_config_frame)
+        palworld_exe_result_label.grid(column=2, row=0)
+
+        arrcon_directory_button = ttk.Button(server_config_frame, text="Select ARRCON Directory:", command="select_arrcon_directory")
+        arrcon_directory_button.grid(column=0, row=1, padx=10, pady=10)
+
+        arrcon_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        arrcon_directory_selection.grid(column=1, row=1, sticky=W)
+
+        arrcon_exe_result_label = ttk.Label(server_config_frame)
+        arrcon_exe_result_label.grid(column=2, row=1)
+
+        steamcmd_directory_button = ttk.Button(server_config_frame, text="Select steamcmd Directory:", command="select_steamcmd_directory")
+        steamcmd_directory_button.grid(column=0, row=2, padx=10, pady=10)
+
+        steamcmd_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        steamcmd_directory_selection.grid(column=1, row=2, sticky=W)
+
+        steamcmd_exe_result_label = ttk.Label(server_config_frame)
+        steamcmd_exe_result_label.grid(column=2, row=2)
+
+        backup_directory_button = ttk.Button(server_config_frame, text="Select Backup Directory:", command="select_backup_directory")
+        backup_directory_button.grid(column=0, row=3, padx=10, pady=10)
+
+        backup_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        backup_directory_selection.grid(column=1, row=3, sticky=W)
+
+        server_start_args_label = ttk.Label(server_config_frame, text="Server Startup Arguments:")
+        server_start_args_label.grid(column=0, row=4, padx=10, pady=10)
+
+        server_start_args_entry = ttk.Entry(server_config_frame, width=100)
+        server_start_args_entry.grid(column=1, row=4, columnspan=2, sticky=W)
 
 
+    """ Alert Tab Configuration """
+    def configure_email_configuration_in_alerts_tab(self):
+        """Configures the email configuration section of the alerts tab"""
+        email_config_frame = LabelFrame(self.alerts_config_tab, text="Email Configuration")
+        email_config_frame.grid(column=0, row=0, padx=10, pady=10, sticky=(N, W, E, S))
+
+        email_address_label = ttk.Label(email_config_frame, text="Email Address:")
+        email_address_label.grid(column=0, row=0, padx=10, sticky=W)
+
+        email_address_entry = ttk.Entry(email_config_frame, width=35)
+        email_address_entry.grid(column=1, row=0, sticky=W)
+
+        email_password_label = ttk.Label(email_config_frame, text="Email Password:")
+        email_password_label.grid(column=0, row=1, padx=10, sticky=W)
+
+        email_password_entry = ttk.Entry(email_config_frame, show="*", width=35)
+        email_password_entry.grid(column=1, row=1, sticky=W)
+
+        smtp_server_label = ttk.Label(email_config_frame, text="SMTP Server:")
+        smtp_server_label.grid(column=0, row=2, padx=10, sticky=W)
+
+        smtp_server_entry = ttk.Entry(email_config_frame)
+        smtp_server_entry.grid(column=1, row=2, sticky=W)
+
+        smtp_port_label = ttk.Label(email_config_frame, text="SMTP Port:")
+        smtp_port_label.grid(column=0, row=3, padx=10, sticky=W)
+
+        smtp_port_entry = ttk.Entry(email_config_frame, width=5)
+        smtp_port_entry.grid(column=1, row=3, sticky=W)
+
+    def configure_discord_configuration_in_alerts_tab(self):
+        """Configures the discord configuration section of the alerts tab"""
+        discord_frame = LabelFrame(self.alerts_config_tab, text="Discord Configuration")
+        discord_frame.grid(column=1, row=0, padx=10, pady=10, sticky=(N, W, E, S))
+
+        discord_label = ttk.Label(discord_frame, text="Discord Webhook URL:")
+        discord_label.grid(column=0, row=0, padx=10)
+
+        discord_entry = ttk.Entry(discord_frame, width=35)
+        discord_entry.grid(column=1, row=0)
+
+        discord_test_button = ttk.Button(discord_frame, text="Send Test Message", command="send_discord_message")
+        discord_test_button.grid(column=0, row=1, columnspan=2, pady=2)
+
+    """ About Tab Configuration """
+    def configure_about_tab(self):
+        """Configures the about tab"""
+        app_info_frame = LabelFrame(self.about_tab, text="Application Info")
+        app_info_frame.grid(column=0, row=0, padx=10, pady=10, sticky=N)
+
+        app_version_label = ttk.Label(app_info_frame, text="Application Version: 1.3.0")
+        app_version_label.grid(column=0, row=0, padx=10)
+
+        app_update_button = ttk.Button(app_info_frame, text="Check for Updates", command="check_for_updates")
+        app_update_button.grid(column=0, row=1, padx=10, pady=10)
+
+        report_bug_button = ttk.Button(app_info_frame, text="Report a Bug", command="report_bug")
+        report_bug_button.grid(column=0, row=2, columnspan=2, padx=10, pady=10)
+
+        support_frame = LabelFrame(self.about_tab, text="Support Info")
+        support_frame.grid(column=0, row=1, padx=10, pady=10, sticky=(E, W))
+
+        feedback_label = ttk.Label(support_frame, text="Have feedback or suggestions? Join my discord and let me know:")
+        feedback_label.grid(column=0, row=0, sticky=E)
+
+        feedback_label_link = ttk.Label(
+            support_frame,
+            text="https://discord.gg/bPp9kfWe5t",
+            foreground="blue",
+            cursor="hand2"
+        )
+        feedback_label_link.grid(column=1, row=0, sticky=W)
+        feedback_label_link.bind("<Button-1>", "open_discord")
+
+        buy_me_beer_label = ttk.Label(
+            support_frame,
+            justify="center",
+            text="This application is completely free and no features will ever be behind a paywall. If you would like to support me I would greatly appreciate it. You can buy me a beer here:"
+        )
+        buy_me_beer_label.grid(column=0, row=1, columnspan=2, sticky=(N, S, E, W))
+
+        buy_me_beer_link = ttk.Label(
+            support_frame,
+            text="https://www.buymeacoffee.com/thewisestguy",
+            foreground="blue",
+            cursor="hand2"
+        )
+        buy_me_beer_link.grid(column=0, row=2, columnspan=2)
+        buy_me_beer_link.bind("<Button-1>", "open_BMAB")
+
+        supporters_frame = LabelFrame(self.about_tab, text="Special Thanks to the Following Supporters:")
+        supporters_frame.grid(column=0, row=2, padx=10, pady=10, sticky=(E, W))
+        supporters_frame.columnconfigure(0, weight=1)
+
+        donations_label = ttk.Label(supporters_frame, justify="center", text="daisame.bsky.social, CBesty")
+        donations_label.grid(column=0, row=0)
+
+
+    """ Output Configuration """
     def create_output_window(self):
         """Creates the output console for the interface"""
         output_frame = Frame(self.root)
@@ -307,6 +518,6 @@ class Interface:
         config_object.save_config()
         self.root.destroy()
 
-    def start_mainloop(self):
+    def run(self):
         """Starts the main loop for the interface"""
         self.root.mainloop()
