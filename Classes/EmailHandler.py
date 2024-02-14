@@ -1,6 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from Classes.Form import form
 
 class EmailHandler:
     """Class that handles the email alerts for the server"""
@@ -33,7 +34,7 @@ class EmailHandler:
             # Send the email
             server.sendmail(self.smtp_user, email_to, msg)
 
-            print("Sent notification email successfully.")
+            form.append_to_output("Sent notification email successfully.")
 
         except smtplib.SMTPException:
             pass

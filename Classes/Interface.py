@@ -1,6 +1,7 @@
 from tkinter import TclError, Tk, ttk, N, W, E, S, StringVar, LabelFrame, BooleanVar, Frame, Text
 from Classes.Config import config_object
 from Classes.Form import form
+from Classes.DiscordHandler import discord_handler
 
 class Interface:
     """Class that handles the TKinter interface for the server manager"""
@@ -421,7 +422,7 @@ class Interface:
         discord_entry = ttk.Entry(discord_frame, width=35)
         discord_entry.grid(column=1, row=0)
 
-        discord_test_button = ttk.Button(discord_frame, text="Send Test Message", command="send_discord_message")
+        discord_test_button = ttk.Button(discord_frame, text="Send Test Message", command=discord_handler.post_discord_message)
         discord_test_button.grid(column=0, row=1, columnspan=2, pady=2)
 
     """ About Tab Configuration """

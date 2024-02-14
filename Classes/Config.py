@@ -1,6 +1,7 @@
 import os
 import json
 from Classes.Form import form
+from Classes.DiscordHandler import discord_handler
 
 class Config:
     def __init__(self):

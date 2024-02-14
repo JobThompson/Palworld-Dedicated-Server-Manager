@@ -1,4 +1,5 @@
 import requests
+from Classes.Form import form
 
 class DiscordHandler:
     """Handles all the discord related stuff."""
@@ -8,7 +9,7 @@ class DiscordHandler:
     def post_discord_message(self, message = "The PalWorld server has crashed. It has been restarted."):
         """Post a message to the discord channel"""
         if self.webhook_url is None:
-            print("No discord webhook URL set. Please set the webhook URL in the settings.")
+            form.append_to_output("No discord webhook URL set. Please set the webhook URL in the settings.")
             return
 
         try:
@@ -19,7 +20,7 @@ class DiscordHandler:
             response.raise_for_status()  # Check for HTTP errors
 
         except requests.exceptions.RequestException as e:
-            print("Error posting discord message: " + str(e))
+            form.append_to_output("Error posting discord message: " + str(e))
 
 
 discord_handler = DiscordHandler()
