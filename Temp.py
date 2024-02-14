@@ -1390,229 +1390,229 @@ def validate_time_input(time):
 # functions_combobox.set("-SELECT-")
 
 # functions_go_button = ttk.Button(server_functions_frame, text="Run", command=functions_go_button_click)
-functions_go_button.grid(column=1, row=0)
+# functions_go_button.grid(column=1, row=0)
 
-###################### Server Information ###################################################
+# ###################### Server Information ###################################################
 
-server_info_frame = tk.LabelFrame(mainTab, text="Server Information")
-server_info_frame.grid(column=1, row=0, padx=10, pady=10, sticky=tk.NSEW)
+# server_info_frame = tk.LabelFrame(mainTab, text="Server Information")
+# server_info_frame.grid(column=1, row=0, padx=10, pady=10, sticky=tk.NSEW)
 
-server_status_label = ttk.Label(server_info_frame, text="Server Status:")
-server_status_label.grid(column=0, row=0, sticky=tk.W)
+# server_status_label = ttk.Label(server_info_frame, text="Server Status:")
+# server_status_label.grid(column=0, row=0, sticky=tk.W)
 
-server_status_state_label = ttk.Label(server_info_frame, text="-")
-server_status_state_label.grid(column=1, row=0)
+# server_status_state_label = ttk.Label(server_info_frame, text="-")
+# server_status_state_label.grid(column=1, row=0)
 
-server_version_label = ttk.Label(server_info_frame, text="Server Version:")
-server_version_label.grid(column=0, row=1, sticky=tk.W)
+# server_version_label = ttk.Label(server_info_frame, text="Server Version:")
+# server_version_label.grid(column=0, row=1, sticky=tk.W)
 
-server_version_state_label = ttk.Label(server_info_frame, text="-")
-server_version_state_label.grid(column=1, row=1)
+# server_version_state_label = ttk.Label(server_info_frame, text="-")
+# server_version_state_label.grid(column=1, row=1)
 
-updateInfoButton = ttk.Button(server_info_frame, text="Update Now", command=server_status_info)
-updateInfoButton.grid(column=0, row=3, columnspan=2, sticky=tk.N)
+# updateInfoButton = ttk.Button(server_info_frame, text="Update Now", command=server_status_info)
+# updateInfoButton.grid(column=0, row=3, columnspan=2, sticky=tk.N)
 
-###################### Server Tab ###################################################
-###################### PalWorldSetting.ini Frame ###################################################
+# ###################### Server Tab ###################################################
+# ###################### PalWorldSetting.ini Frame ###################################################
 
-server_info_frame = tk.LabelFrame(serverTab, text="PalWorldSettings.ini")
-server_info_frame.grid(column=0, row=0, padx=10, pady=10)
+# server_info_frame = tk.LabelFrame(serverTab, text="PalWorldSettings.ini")
+# server_info_frame.grid(column=0, row=0, padx=10, pady=10)
 
-server_name_label = ttk.Label(server_info_frame, text="Server Name:")
-server_name_label.grid(column=0, row=0, sticky=tk.W, padx=10)
+# server_name_label = ttk.Label(server_info_frame, text="Server Name:")
+# server_name_label.grid(column=0, row=0, sticky=tk.W, padx=10)
 
-server_name = ttk.Label(server_info_frame, text="-")
-server_name.grid(column=0, row=1, sticky=tk.W, padx=10)
+# server_name = ttk.Label(server_info_frame, text="-")
+# server_name.grid(column=0, row=1, sticky=tk.W, padx=10)
 
-server_description_label = ttk.Label(server_info_frame, text="Server Description:")
-server_description_label.grid(column=0, row=2, sticky=tk.W, padx=10)
+# server_description_label = ttk.Label(server_info_frame, text="Server Description:")
+# server_description_label.grid(column=0, row=2, sticky=tk.W, padx=10)
 
-server_description = ttk.Label(server_info_frame, text="-")
-server_description.grid(column=0, row=3, sticky=tk.W, padx=10)
+# server_description = ttk.Label(server_info_frame, text="-")
+# server_description.grid(column=0, row=3, sticky=tk.W, padx=10)
 
-server_password_label = ttk.Label(server_info_frame, text="Server Password:")
-server_password_label.grid(column=0, row=4, sticky=tk.W, padx=10)
+# server_password_label = ttk.Label(server_info_frame, text="Server Password:")
+# server_password_label.grid(column=0, row=4, sticky=tk.W, padx=10)
 
-server_password = ttk.Label(server_info_frame, text="-")
-server_password.grid(column=0, row=5, sticky=tk.W, padx=10)
+# server_password = ttk.Label(server_info_frame, text="-")
+# server_password.grid(column=0, row=5, sticky=tk.W, padx=10)
 
-max_players_label = ttk.Label(server_info_frame, text="Max Players:")
-max_players_label.grid(column=1, row=0, sticky=tk.W, padx=10)
+# max_players_label = ttk.Label(server_info_frame, text="Max Players:")
+# max_players_label.grid(column=1, row=0, sticky=tk.W, padx=10)
 
-max_players = ttk.Label(server_info_frame, text="-")
-max_players.grid(column=1, row=1, sticky=tk.W, padx=10)
+# max_players = ttk.Label(server_info_frame, text="-")
+# max_players.grid(column=1, row=1, sticky=tk.W, padx=10)
 
-server_port_label = ttk.Label(server_info_frame, text="Server Port:")
-server_port_label.grid(column=1, row=2, sticky=tk.W, padx=10)
+# server_port_label = ttk.Label(server_info_frame, text="Server Port:")
+# server_port_label.grid(column=1, row=2, sticky=tk.W, padx=10)
 
-server_port = ttk.Label(server_info_frame, text="-")
-server_port.grid(column=1, row=3, sticky=tk.W, padx=10)
+# server_port = ttk.Label(server_info_frame, text="-")
+# server_port.grid(column=1, row=3, sticky=tk.W, padx=10)
 
-rcon_port_label = ttk.Label(server_info_frame, text="RCON Port:")
-rcon_port_label.grid(column=2, row=0, sticky=tk.W, padx=10)
+# rcon_port_label = ttk.Label(server_info_frame, text="RCON Port:")
+# rcon_port_label.grid(column=2, row=0, sticky=tk.W, padx=10)
 
-rcon_port = ttk.Label(server_info_frame, text="-")
-rcon_port.grid(column=2, row=1, sticky=tk.W, padx=10)
+# rcon_port = ttk.Label(server_info_frame, text="-")
+# rcon_port.grid(column=2, row=1, sticky=tk.W, padx=10)
 
-rcon_state_label = ttk.Label(server_info_frame, text="RCON Enabled:")
-rcon_state_label.grid(column=2, row=2, sticky=tk.W, padx=10)
+# rcon_state_label = ttk.Label(server_info_frame, text="RCON Enabled:")
+# rcon_state_label.grid(column=2, row=2, sticky=tk.W, padx=10)
 
-rcon_state = ttk.Label(server_info_frame, text="-")
-rcon_state.grid(column=2, row=3, sticky=tk.W, padx=10)
+# rcon_state = ttk.Label(server_info_frame, text="-")
+# rcon_state.grid(column=2, row=3, sticky=tk.W, padx=10)
 
-rcon_password_label = ttk.Label(server_info_frame, text="RCON Password:")
-rcon_password_label.grid(column=2, row=4, sticky=tk.W, padx=10)
+# rcon_password_label = ttk.Label(server_info_frame, text="RCON Password:")
+# rcon_password_label.grid(column=2, row=4, sticky=tk.W, padx=10)
 
-rcon_password = ttk.Label(server_info_frame, text="-")
-rcon_password.grid(column=2, row=5, sticky=tk.W, padx=10)
+# rcon_password = ttk.Label(server_info_frame, text="-")
+# rcon_password.grid(column=2, row=5, sticky=tk.W, padx=10)
 
-edit_server_config_button = ttk.Button(server_info_frame, text="Edit PalWorldSettings.ini", command=lambda: open_ini_file(server_directory_selection.cget("text")))
-edit_server_config_button.grid(column=0, row=6, columnspan=3, padx=10, pady=10)
+# edit_server_config_button = ttk.Button(server_info_frame, text="Edit PalWorldSettings.ini", command=lambda: open_ini_file(server_directory_selection.cget("text")))
+# edit_server_config_button.grid(column=0, row=6, columnspan=3, padx=10, pady=10)
 
-###################### Server Configuration Frame ###################################################
+# ###################### Server Configuration Frame ###################################################
 
-server_config_frame = tk.LabelFrame(serverTab, text="Server Configuration")
-server_config_frame.grid(column=0, row=1, padx=10, pady=10)
+# server_config_frame = tk.LabelFrame(serverTab, text="Server Configuration")
+# server_config_frame.grid(column=0, row=1, padx=10, pady=10)
 
-server_directory_button = ttk.Button(server_config_frame, text="Select Palworld Directory:", command=select_palworld_directory)
-server_directory_button.grid(column=0, row=0, padx=10, pady=10)
+# server_directory_button = ttk.Button(server_config_frame, text="Select Palworld Directory:", command=select_palworld_directory)
+# server_directory_button.grid(column=0, row=0, padx=10, pady=10)
 
-server_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-server_directory_selection.grid(column=1, row=0, sticky=tk.W)
+# server_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+# server_directory_selection.grid(column=1, row=0, sticky=tk.W)
 
-palworld_exe_result_label = ttk.Label(server_config_frame)
-palworld_exe_result_label.grid(column=2, row=0)
+# palworld_exe_result_label = ttk.Label(server_config_frame)
+# palworld_exe_result_label.grid(column=2, row=0)
 
-arrcon_directory_button = ttk.Button(server_config_frame, text="Select ARRCON Directory:", command=select_arrcon_directory)
-arrcon_directory_button.grid(column=0, row=1, padx=10, pady=10)
+# arrcon_directory_button = ttk.Button(server_config_frame, text="Select ARRCON Directory:", command=select_arrcon_directory)
+# arrcon_directory_button.grid(column=0, row=1, padx=10, pady=10)
 
-arrcon_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-arrcon_directory_selection.grid(column=1, row=1, sticky=tk.W)
+# arrcon_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+# arrcon_directory_selection.grid(column=1, row=1, sticky=tk.W)
 
-arrcon_exe_result_label = ttk.Label(server_config_frame)
-arrcon_exe_result_label.grid(column=2, row=1)
+# arrcon_exe_result_label = ttk.Label(server_config_frame)
+# arrcon_exe_result_label.grid(column=2, row=1)
 
-steamcmd_directory_button = ttk.Button(server_config_frame, text="Select steamcmd Directory:", command=select_steamcmd_directory)
-steamcmd_directory_button.grid(column=0, row=2, padx=10, pady=10)
+# steamcmd_directory_button = ttk.Button(server_config_frame, text="Select steamcmd Directory:", command=select_steamcmd_directory)
+# steamcmd_directory_button.grid(column=0, row=2, padx=10, pady=10)
 
-steamcmd_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-steamcmd_directory_selection.grid(column=1, row=2, sticky=tk.W)
+# steamcmd_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+# steamcmd_directory_selection.grid(column=1, row=2, sticky=tk.W)
 
-steamcmd_exe_result_label = ttk.Label(server_config_frame)
-steamcmd_exe_result_label.grid(column=2, row=2)
+# steamcmd_exe_result_label = ttk.Label(server_config_frame)
+# steamcmd_exe_result_label.grid(column=2, row=2)
 
-backup_directory_button = ttk.Button(server_config_frame, text="Select Backup Directory:", command=select_backup_directory)
-backup_directory_button.grid(column=0, row=3, padx=10, pady=10)
+# backup_directory_button = ttk.Button(server_config_frame, text="Select Backup Directory:", command=select_backup_directory)
+# backup_directory_button.grid(column=0, row=3, padx=10, pady=10)
 
-backup_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-backup_directory_selection.grid(column=1, row=3, sticky=tk.W)
+# backup_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+# backup_directory_selection.grid(column=1, row=3, sticky=tk.W)
 
-server_start_args_label = ttk.Label(server_config_frame, text="Server Startup Arguments:")
-server_start_args_label.grid(column=0, row=4, padx=10, pady=10)
+# server_start_args_label = ttk.Label(server_config_frame, text="Server Startup Arguments:")
+# server_start_args_label.grid(column=0, row=4, padx=10, pady=10)
 
-server_start_args_entry = ttk.Entry(server_config_frame, width=100)
-server_start_args_entry.grid(column=1, row=4, columnspan=2, sticky=tk.W)
+# server_start_args_entry = ttk.Entry(server_config_frame, width=100)
+# server_start_args_entry.grid(column=1, row=4, columnspan=2, sticky=tk.W)
 
-###################### Alerts Tab ###################################################
-###################### Email Configuration Frame ####################################
-email_config_frame = tk.LabelFrame(alertsTab, text="Email Configuration")
-email_config_frame.grid(column=0, row=0, padx=10, pady=10, sticky=tk.NSEW)
+# ###################### Alerts Tab ###################################################
+# ###################### Email Configuration Frame ####################################
+# email_config_frame = tk.LabelFrame(alertsTab, text="Email Configuration")
+# email_config_frame.grid(column=0, row=0, padx=10, pady=10, sticky=tk.NSEW)
 
-email_address_label = ttk.Label(email_config_frame, text="Email Address:")
-email_address_label.grid(column=0, row=0, padx=10, sticky=tk.W)
+# email_address_label = ttk.Label(email_config_frame, text="Email Address:")
+# email_address_label.grid(column=0, row=0, padx=10, sticky=tk.W)
 
-email_address_entry = ttk.Entry(email_config_frame, width=35)
-email_address_entry.grid(column=1, row=0, sticky=tk.W)
+# email_address_entry = ttk.Entry(email_config_frame, width=35)
+# email_address_entry.grid(column=1, row=0, sticky=tk.W)
 
-email_password_label = ttk.Label(email_config_frame, text="Email Password:")
-email_password_label.grid(column=0, row=1, padx=10, sticky=tk.W)
+# email_password_label = ttk.Label(email_config_frame, text="Email Password:")
+# email_password_label.grid(column=0, row=1, padx=10, sticky=tk.W)
 
-email_password_entry = ttk.Entry(email_config_frame, show="*", width=35)
-email_password_entry.grid(column=1, row=1, sticky=tk.W)
+# email_password_entry = ttk.Entry(email_config_frame, show="*", width=35)
+# email_password_entry.grid(column=1, row=1, sticky=tk.W)
 
-smtp_server_label = ttk.Label(email_config_frame, text="SMTP Server:")
-smtp_server_label.grid(column=0, row=2, padx=10, sticky=tk.W)
+# smtp_server_label = ttk.Label(email_config_frame, text="SMTP Server:")
+# smtp_server_label.grid(column=0, row=2, padx=10, sticky=tk.W)
 
-smtp_server_entry = ttk.Entry(email_config_frame)
-smtp_server_entry.grid(column=1, row=2, sticky=tk.W)
+# smtp_server_entry = ttk.Entry(email_config_frame)
+# smtp_server_entry.grid(column=1, row=2, sticky=tk.W)
 
-smtp_port_label = ttk.Label(email_config_frame, text="SMTP Port:")
-smtp_port_label.grid(column=0, row=3, padx=10, sticky=tk.W)
+# smtp_port_label = ttk.Label(email_config_frame, text="SMTP Port:")
+# smtp_port_label.grid(column=0, row=3, padx=10, sticky=tk.W)
 
-smtp_port_entry = ttk.Entry(email_config_frame, width=5)
-smtp_port_entry.grid(column=1, row=3, sticky=tk.W)
+# smtp_port_entry = ttk.Entry(email_config_frame, width=5)
+# smtp_port_entry.grid(column=1, row=3, sticky=tk.W)
 
-###################### Discord Configuration Frame ####################################
+# ###################### Discord Configuration Frame ####################################
 
-discord_frame = tk.LabelFrame(alertsTab, text="Discord Configuration")
-discord_frame.grid(column=1, row=0, padx=10, pady=10, sticky=tk.NSEW)
+# discord_frame = tk.LabelFrame(alertsTab, text="Discord Configuration")
+# discord_frame.grid(column=1, row=0, padx=10, pady=10, sticky=tk.NSEW)
 
-discordLabel = ttk.Label(discord_frame, text="Discord Webhook URL:")
-discordLabel.grid(column=0, row=0, padx=10)
+# discordLabel = ttk.Label(discord_frame, text="Discord Webhook URL:")
+# discordLabel.grid(column=0, row=0, padx=10)
 
-discordEntry = ttk.Entry(discord_frame, width=35)
-discordEntry.grid(column=1, row=0)
+# discordEntry = ttk.Entry(discord_frame, width=35)
+# discordEntry.grid(column=1, row=0)
 
-discordTestButton = ttk.Button(discord_frame, text="Send Test Message", command=send_discord_message)
-discordTestButton.grid(column=0, row=1, columnspan=2, pady=2)
+# discordTestButton = ttk.Button(discord_frame, text="Send Test Message", command=send_discord_message)
+# discordTestButton.grid(column=0, row=1, columnspan=2, pady=2)
 
-###################### About Tab ###################################################
+# ###################### About Tab ###################################################
 
-app_info_frame = tk.LabelFrame(aboutTab, text="Application Info")
-app_info_frame.grid(column=0, row=0, padx=10, pady=10, sticky=tk.N)
+# app_info_frame = tk.LabelFrame(aboutTab, text="Application Info")
+# app_info_frame.grid(column=0, row=0, padx=10, pady=10, sticky=tk.N)
 
-app_version_label = ttk.Label(app_info_frame, text="Application Version: 1.3.0")
-app_version_label.grid(column=0, row=0, padx=10)
+# app_version_label = ttk.Label(app_info_frame, text="Application Version: 1.3.0")
+# app_version_label.grid(column=0, row=0, padx=10)
 
-app_update_button = ttk.Button(app_info_frame, text="Check for Updates", command=check_for_updates)
-app_update_button.grid(column=0, row=1, padx=10, pady=10)
+# app_update_button = ttk.Button(app_info_frame, text="Check for Updates", command=check_for_updates)
+# app_update_button.grid(column=0, row=1, padx=10, pady=10)
 
-report_bug_button = ttk.Button(app_info_frame, text="Report a Bug", command=report_bug)
-report_bug_button.grid(column=0, row=2, columnspan=2, padx=10, pady=10)
+# report_bug_button = ttk.Button(app_info_frame, text="Report a Bug", command=report_bug)
+# report_bug_button.grid(column=0, row=2, columnspan=2, padx=10, pady=10)
 
-support_frame = tk.LabelFrame(aboutTab, text="Support Info")
-support_frame.grid(column=0, row=1, padx=10, pady=10, sticky=tk.EW)
+# support_frame = tk.LabelFrame(aboutTab, text="Support Info")
+# support_frame.grid(column=0, row=1, padx=10, pady=10, sticky=tk.EW)
 
-feedback_label = ttk.Label(support_frame, text="Have feedback or suggestions? Join my discord and let me know:")
-feedback_label.grid(column=0, row=0, sticky=tk.E)
+# feedback_label = ttk.Label(support_frame, text="Have feedback or suggestions? Join my discord and let me know:")
+# feedback_label.grid(column=0, row=0, sticky=tk.E)
 
-feedback_label_link = tk.Label(support_frame, text="https://discord.gg/bPp9kfWe5t", foreground="blue", cursor="hand2")
-feedback_label_link.grid(column=1, row=0, sticky=tk.W)
-feedback_label_link.bind("<Button-1>", open_discord)
+# feedback_label_link = tk.Label(support_frame, text="https://discord.gg/bPp9kfWe5t", foreground="blue", cursor="hand2")
+# feedback_label_link.grid(column=1, row=0, sticky=tk.W)
+# feedback_label_link.bind("<Button-1>", open_discord)
 
-buy_me_beer_label = ttk.Label(support_frame, justify="center", text="This application is completely free and no features will ever be behind a paywall. If you would like to support me I would greatly appreciate it. You can buy me a beer here:")
-buy_me_beer_label.grid(column=0, row=1, columnspan=2, sticky=tk.NSEW)
+# buy_me_beer_label = ttk.Label(support_frame, justify="center", text="This application is completely free and no features will ever be behind a paywall. If you would like to support me I would greatly appreciate it. You can buy me a beer here:")
+# buy_me_beer_label.grid(column=0, row=1, columnspan=2, sticky=tk.NSEW)
 
-buy_me_beer_link = tk.Label(support_frame, text="https://www.buymeacoffee.com/thewisestguy", foreground="blue", cursor="hand2")
-buy_me_beer_link.grid(column=0, row=2, columnspan=2)
-buy_me_beer_link.bind("<Button-1>", open_BMAB)
+# buy_me_beer_link = tk.Label(support_frame, text="https://www.buymeacoffee.com/thewisestguy", foreground="blue", cursor="hand2")
+# buy_me_beer_link.grid(column=0, row=2, columnspan=2)
+# buy_me_beer_link.bind("<Button-1>", open_BMAB)
 
-supporters_frame = tk.LabelFrame(aboutTab, text="Special Thanks to the Following Supporters:")
-supporters_frame.grid(column=0, row=2, padx=10, pady=10, sticky=tk.EW)
-supporters_frame.columnconfigure(0, weight=1)
+# supporters_frame = tk.LabelFrame(aboutTab, text="Special Thanks to the Following Supporters:")
+# supporters_frame.grid(column=0, row=2, padx=10, pady=10, sticky=tk.EW)
+# supporters_frame.columnconfigure(0, weight=1)
 
-donations_label = ttk.Label(supporters_frame, justify="center", text="daisame.bsky.social, CBesty")
-donations_label.grid(column=0, row=0)
+# donations_label = ttk.Label(supporters_frame, justify="center", text="daisame.bsky.social, CBesty")
+# donations_label.grid(column=0, row=0)
 
 
 
 ###################### Console Output Frame ###################################################
 
-outputFrame = tk.Frame(root)
-outputFrame.pack(side="bottom", expand=True, fill=tk.BOTH)
+# outputFrame = tk.Frame(root)
+# outputFrame.pack(side="bottom", expand=True, fill=tk.BOTH)
 
-outputLabel = ttk.Label(outputFrame, text="Output Window:")
-outputLabel.pack()
+# outputLabel = ttk.Label(outputFrame, text="Output Window:")
+# outputLabel.pack()
 
-# scrollbar for output window
-scrollbar = ttk.Scrollbar(outputFrame, orient='vertical')
-scrollbar.pack(side="right", fill="y")
+# # scrollbar for output window
+# scrollbar = ttk.Scrollbar(outputFrame, orient='vertical')
+# scrollbar.pack(side="right", fill="y")
 
-# text widget for the output
-output_text = tk.Text(outputFrame, wrap=tk.WORD, height=10, width=85, yscrollcommand=scrollbar.set)
-output_text.pack(padx=10, pady=10, expand=True, fill=tk.BOTH)
+# # text widget for the output
+# output_text = tk.Text(outputFrame, wrap=tk.WORD, height=10, width=85, yscrollcommand=scrollbar.set)
+# output_text.pack(padx=10, pady=10, expand=True, fill=tk.BOTH)
 
-scrollbar.config(command=output_text.yview)
+# scrollbar.config(command=output_text.yview)
 
 load_settings()
 
