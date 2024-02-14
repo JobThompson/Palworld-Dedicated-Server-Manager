@@ -3,11 +3,11 @@ from datetime import datetime
 from Classes.Config import config_object
 
 class Interface:
+    """Class that handles the TKinter interface for the server manager"""
     def __init__(self) -> None:
         self.root = Tk()
         self.mainframe = None
-        self.tabControl = None
-        
+        self.tab_control = None
         
         self.entry_width = 10
         
@@ -19,6 +19,7 @@ class Interface:
         self.config_server_functions_in_main_tab()
         self.create_output_window()
         self.set_exit_conditions()
+        config_object.load_config()
         self.start_mainloop()
         
     def set_favicon(self, icon_path):
@@ -35,16 +36,16 @@ class Interface:
         
         
     def create_tabs(self):
-        self.tabControl = ttk.Notebook(self.root)
-        self.main_tab = ttk.Frame(self.tabControl) 
-        self.server_config_tab = ttk.Frame(self.tabControl)
-        self.alerts_config_tab = ttk.Frame(self.tabControl)
-        self.about_tab = ttk.Frame(self.tabControl)
-        self.tabControl.add(self.main_tab, text ='Main') 
-        self.tabControl.add(self.server_config_tab, text ='Server Config')
-        self.tabControl.add(self.alerts_config_tab, text ='Alerts Config') 
-        self.tabControl.add(self.about_tab, text ='About') 
-        self.tabControl.pack(expand = 1, fill ="both")
+        self.tab_control = ttk.Notebook(self.root)
+        self.main_tab = ttk.Frame(self.tab_control) 
+        self.server_config_tab = ttk.Frame(self.tab_control)
+        self.alerts_config_tab = ttk.Frame(self.tab_control)
+        self.about_tab = ttk.Frame(self.tab_control)
+        self.tab_control.add(self.main_tab, text ='Main') 
+        self.tab_control.add(self.server_config_tab, text ='Server Config')
+        self.tab_control.add(self.alerts_config_tab, text ='Alerts Config') 
+        self.tab_control.add(self.about_tab, text ='About') 
+        self.tab_control.pack(expand = 1, fill ="both")
         self.main_tab.columnconfigure(0, weight=1)
         self.main_tab.columnconfigure(1, weight=1)
         self.server_config_tab.columnconfigure(0, weight=1)
@@ -59,38 +60,42 @@ class Interface:
         restart_interval_checkbox_var = BooleanVar()
         restart_interval_checkbox = ttk.Checkbutton(main_interval_frame, variable=restart_interval_checkbox_var, command="enable_server_restart")
         restart_interval_checkbox.grid(column=0, row=0)
-        restartLabel = ttk.Label(main_interval_frame, text="Server Restart Interval (hours):")
-        restartLabel.grid(column=1, row=0, sticky=(W))
-        restartEntry = ttk.Entry(main_interval_frame, width=self.entry_width)
-        restartEntry.grid(column=2, row=0, sticky=(W))
+        restart_label = ttk.Label(main_interval_frame, text="Server Restart Interval (hours):")
+        restart_label.grid(column=1, row=0, sticky=(W))
+        config_object.restart_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
+        config_object.restart_entry.grid(column=2, row=0, sticky=(W))
 
-        restartScheduleCheckbox_var = BooleanVar()
-        restartScheduleCheckbox = ttk.Checkbutton(main_interval_frame, variable=restartScheduleCheckbox_var, command="enable_scheduled_restart")
-        restartScheduleCheckbox.grid(column=0, row=1)
-        restartScheduleLabel = ttk.Label(main_interval_frame, text="Daily Server Restart Time (12-hour Format):")
-        restartScheduleLabel.grid(column=1, row=1, sticky=(W))
-        restartTimeEntry_var = StringVar()
-        restartScheduleEntry = ttk.Entry(main_interval_frame, textvariable=restartTimeEntry_var, width=self.entry_width)
-        restartScheduleEntry.grid(column=2, row=1, sticky=(W))
-        ampm_var = StringVar(value="AM")
-        ampm_combobox = ttk.Combobox(main_interval_frame, textvariable=ampm_var, values=["AM", "PM"], width=4)
+        restart_schedule_checkbox_var = BooleanVar()
+        restart_schedule_checkbox = ttk.Checkbutton(
+            main_interval_frame,
+            variable=restart_schedule_checkbox_var,
+            command="enable_scheduled_restart"
+        )
+        restart_schedule_checkbox.grid(column=0, row=1)
+        restart_schedule_label = ttk.Label(main_interval_frame, text="Daily Server Restart Time (12-hour Format):")
+        restart_schedule_label.grid(column=1, row=1, sticky=(W))
+        config_object.restart_schedule_entry = StringVar()
+        restart_schedule_entry = ttk.Entry(main_interval_frame, textvariable=config_object.restart_schedule_entry, width=self.entry_width)
+        restart_schedule_entry.grid(column=2, row=1, sticky=(W))
+        config_object.ampm_var = StringVar(value="AM")
+        ampm_combobox = ttk.Combobox(main_interval_frame, textvariable=config_object.ampm_var, values=["AM", "PM"], width=4)
         ampm_combobox.grid(column=3, row=1)
 
-        monitor_interval_checkbox_var = BooleanVar()
-        monitor_interval_checkbox = ttk.Checkbutton(main_interval_frame, variable=monitor_interval_checkbox_var, command="enable_monitor_server")
+        config_object.monitor_interval_checkbox_var = BooleanVar()
+        monitor_interval_checkbox = ttk.Checkbutton(main_interval_frame, variable=config_object.monitor_interval_checkbox_var, command="enable_monitor_server")
         monitor_interval_checkbox.grid(column=0, row=2)
-        monitorLabel = ttk.Label(main_interval_frame, text="Monitor Interval (minutes):")
-        monitorLabel.grid(column=1, row=2, sticky=(W))
-        monitorEntry = ttk.Entry(main_interval_frame, width=self.entry_width)
-        monitorEntry.grid(column=2, row=2, sticky=(W))
+        monitor_label = ttk.Label(main_interval_frame, text="Monitor Interval (minutes):")
+        monitor_label.grid(column=1, row=2, sticky=(W))
+        config_object.monitor_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
+        config_object.monitor_entry.grid(column=2, row=2, sticky=(W))
 
-        backupIntervalCheckbox_var = BooleanVar()
-        backupIntervalCheckbox = ttk.Checkbutton(main_interval_frame, variable=backupIntervalCheckbox_var, command="enable_backup_interval")
-        backupIntervalCheckbox.grid(column=0, row=3)
-        backupIntervalLabel = ttk.Label(main_interval_frame, text="Backup Server Interval (hours):")
-        backupIntervalLabel.grid(column=1, row=3, sticky=(W))
-        backupIntervalEntry = ttk.Entry(main_interval_frame, width=self.entry_width)
-        backupIntervalEntry.grid(column=2, row=3, sticky=(W))
+        config_object.backup_interval_checkbox_var = BooleanVar()
+        backup_interval_checkbox = ttk.Checkbutton(main_interval_frame, variable=config_object.backup_interval_checkbox_var, command="enable_backup_interval")
+        backup_interval_checkbox.grid(column=0, row=3)
+        backup_interval_label = ttk.Label(main_interval_frame, text="Backup Server Interval (hours):")
+        backup_interval_label.grid(column=1, row=3, sticky=(W))
+        config_object.backup_interval_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
+        config_object.backup_interval_entry.grid(column=2, row=3, sticky=(W))
         
     
     def config_optional_config_in_main_tab(self):
