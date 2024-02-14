@@ -1,5 +1,6 @@
 import os
 import json
+from Classes.Form import form
 
 class Config:
     def __init__(self):
@@ -21,23 +22,6 @@ class Config:
         self.shutdown_server_command = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "shutdown 5 The_server_will_be_shutting_down_in_5_seconds"'
         self.force_shutdown_server_command = f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_getport} -p {self.rcon_pass} "doexit"'
 
-        self.restart_entry = None
-        self.restart_schedule_entry = None
-        self.monitor_interval_checkbox_var = None
-        self.ampm_var = None
-        self.monitor_entry = None
-        self.backup_interval_entry = None
-        self.server_directory_selection = None
-        self.arrcon_directory_selection = None
-        self.steamcmd_directory_selection = None
-        self.backup_directory_selection = None
-        self.server_start_args_entry = None
-        self.send_email_checkbox = None
-        self.email_address_entry = None
-        self.discord_entry = None
-        self.smtp_server_entry = None
-        self.smtp_port_entry = None
-
         # self.load_config()
 
     def get_or_create_config_directory(self):
@@ -49,22 +33,22 @@ class Config:
     def save_config(self):
         try:
             settings = {
-                "restart_entry": self.restart_entry.get(),
-                "restart_schedule_entry": self.restart_schedule_entry.get(),
-                "monitor_interval_checkbox_var": self.monitor_interval_checkbox_var.get(),
-                "ampm_var": self.ampm_var.get(),
-                "monitor_entry": self.monitor_entry.get(),
-                "backup_interval_entry": self.backup_interval_entry.get(),
-                # "server_directory_selection": self.server_directory_selection.cget("text"),
-                # "arrcon_directory_selection": self.arrcon_directory_selection.cget("text"),
-                # "steamcmd_directory_selection": self.steamcmd_directory_selection.cget("text"),
-                # "backup_directory_selection": self.backup_directory_selection.cget("text"),
-                # "server_start_args_entry": self.server_start_args_entry.get(),
-                # "send_email_checkbox": self.send_email_checkbox.get(),
-                # "email_address_entry": self.email_address_entry.get(),
-                # "discord_entry": self.discord_entry.get(),
-                # "smtp_server_entry": self.smtp_server_entry.get(),
-                # "smtp_port_entry": self.smtp_port_entry.get()
+                "restart_entry": form.restart_entry.get(),
+                "restart_schedule_entry": form.restart_schedule_entry.get(),
+                "monitor_interval_checkbox_var": form.monitor_interval_checkbox_var.get(),
+                "ampm_var": form.ampm_var.get(),
+                "monitor_entry": form.monitor_entry.get(),
+                "backup_interval_entry": form.backup_interval_entry.get(),
+                # "server_directory_selection": form.server_directory_selection.cget("text"),
+                # "arrcon_directory_selection": form.arrcon_directory_selection.cget("text"),
+                # "steamcmd_directory_selection": form.steamcmd_directory_selection.cget("text"),
+                # "backup_directory_selection": form.backup_directory_selection.cget("text"),
+                # "server_start_args_entry": form.server_start_args_entry.get(),
+                # "send_email_checkbox": form.send_email_checkbox.get(),
+                # "email_address_entry": form.email_address_entry.get(),
+                # "discord_entry": form.discord_entry.get(),
+                # "smtp_server_entry": form.smtp_server_entry.get(),
+                # "smtp_port_entry": form.smtp_port_entry.get()
             }
             with open(self.config_file_path, "w", encoding="utf-8") as file:
                 json.dump(settings, file)
@@ -77,12 +61,12 @@ class Config:
         try:
             with open(self.config_file_path, "r", encoding="utf-8") as file:
                 config = json.load(file)
-                # self.restart_entry.insert(0, config.get("restart_entry", ""))
-                # self.restart_schedule_entry.insert(0, config.get("restart_schedule_entry", ""))
-                # self.monitor_interval_checkbox_var.insert(False, "monitor_interval_checkbox_var")
-                # self.ampm_var.set(config.get("ampm_var", "AM"))
-                # self.monitor_entry.insert(0, config.get("monitor_entry", ""))
-                # self.backup_interval_entry.insert(0, config.get("backup_interval_entry", ""))
+                # form.restart_entry.insert(0, config.get("restart_entry", ""))
+                # form.restart_schedule_entry.insert(0, config.get("restart_schedule_entry", ""))
+                # form.monitor_interval_checkbox_var.insert(False, "monitor_interval_checkbox_var")
+                # form.ampm_var.set(config.get("ampm_var", "AM"))
+                # form.monitor_entry.insert(0, config.get("monitor_entry", ""))
+                # form.backup_interval_entry.insert(0, config.get("backup_interval_entry", ""))
                 # server_directory_selection.config(text=config.get("server_directory_selection", "No directory selected"))
                 # arrcon_directory_selection.config(text=config.get("arrcon_directory_selection", "No directory selected"))
                 # steamcmd_directory_selection.config(text=config.get("steamcmd_directory_selection", "No directory selected"))

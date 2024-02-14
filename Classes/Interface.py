@@ -1,6 +1,6 @@
 from tkinter import TclError, Tk, ttk, N, W, E, S, StringVar, LabelFrame, BooleanVar, Frame, Text
-from datetime import datetime
 from Classes.Config import config_object
+from Classes.Form import form
 
 class Interface:
     """Class that handles the TKinter interface for the server manager"""
@@ -12,7 +12,9 @@ class Interface:
         self.tab_control = None
 
         self.entry_width = 10
-
+        
+        self.create_output_window() # This goes first so that the output window is created before any output is sent to it.
+        
         self.set_favicon('palworld_logo.ico')
         self.configure_main_window_size()
         self.create_tabs()
@@ -25,7 +27,6 @@ class Interface:
         self.configure_email_configuration_in_alerts_tab()
         self.configure_discord_configuration_in_alerts_tab()
         self.configure_about_tab()
-        self.create_output_window()
         self.set_exit_conditions()
         config_object.load_config()
 
@@ -34,10 +35,11 @@ class Interface:
         """Sets the favicon for the main window"""
         try:
             self.root.iconbitmap(icon_path)
+            form.append_to_output("Icon loaded successfully.")
         except FileNotFoundError as e:
-            self.append_to_output("Icon file not found: " + str(e))
+            form.append_to_output("Icon file not found: " + str(e))
         except TclError as e:
-            self.append_to_output("Error loading icon: " + str(e))
+            form.append_to_output("Error loading icon: " + str(e))
 
 
     def configure_main_window_size(self):
@@ -72,10 +74,10 @@ class Interface:
         """Configures the interval configuration section of the main tab"""
         main_interval_frame = LabelFrame(self.main_tab, text="Interval Configuration")
         main_interval_frame.grid(column=0, row=0, padx=10, pady=10, sticky=(N, W, E, S))
-        restart_interval_checkbox_var = BooleanVar()
+        form.restart_interval_checkbox_var = BooleanVar()
         restart_interval_checkbox = ttk.Checkbutton(
             main_interval_frame,
-            variable=restart_interval_checkbox_var,
+            variable=form.restart_interval_checkbox_var,
             command="enable_server_restart"
         )
         restart_interval_checkbox.grid(column=0, row=0)
@@ -84,13 +86,13 @@ class Interface:
             text="Server Restart Interval (hours):"
         )
         restart_label.grid(column=1, row=0, sticky=W)
-        config_object.restart_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
-        config_object.restart_entry.grid(column=2, row=0, sticky=W)
+        form.restart_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
+        form.restart_entry.grid(column=2, row=0, sticky=W)
 
-        restart_schedule_checkbox_var = BooleanVar()
+        form.restart_schedule_checkbox_var = BooleanVar()
         restart_schedule_checkbox = ttk.Checkbutton(
             main_interval_frame,
-            variable=restart_schedule_checkbox_var,
+            variable=form.restart_schedule_checkbox_var,
             command="enable_scheduled_restart"
         )
         restart_schedule_checkbox.grid(column=0, row=1)
@@ -99,26 +101,26 @@ class Interface:
             text="Daily Server Restart Time (12-hour Format):"
         )
         restart_schedule_label.grid(column=1, row=1, sticky=W)
-        config_object.restart_schedule_entry = StringVar()
+        form.restart_schedule_entry = StringVar()
         restart_schedule_entry = ttk.Entry(
             main_interval_frame,
-            textvariable=config_object.restart_schedule_entry,
+            textvariable=form.restart_schedule_entry,
             width=self.entry_width
         )
         restart_schedule_entry.grid(column=2, row=1, sticky=W)
-        config_object.ampm_var = StringVar(value="AM")
+        form.ampm_var = StringVar(value="AM")
         ampm_combobox = ttk.Combobox(
             main_interval_frame,
-            textvariable=config_object.ampm_var,
+            textvariable=form.ampm_var,
             values=["AM", "PM"],
             width=4
         )
         ampm_combobox.grid(column=3, row=1)
 
-        config_object.monitor_interval_checkbox_var = BooleanVar()
+        form.monitor_interval_checkbox_var = BooleanVar()
         monitor_interval_checkbox = ttk.Checkbutton(
             main_interval_frame,
-            variable=config_object.monitor_interval_checkbox_var,
+            variable=form.monitor_interval_checkbox_var,
             command="enable_monitor_server"
         )
         monitor_interval_checkbox.grid(column=0, row=2)
@@ -128,13 +130,13 @@ class Interface:
             row=2,
             sticky=W
         )
-        config_object.monitor_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
-        config_object.monitor_entry.grid(column=2, row=2, sticky=W)
+        form.monitor_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
+        form.monitor_entry.grid(column=2, row=2, sticky=W)
 
-        config_object.backup_interval_checkbox_var = BooleanVar()
+        form.backup_interval_checkbox_var = BooleanVar()
         backup_interval_checkbox = ttk.Checkbutton(
             main_interval_frame,
-            variable=config_object.backup_interval_checkbox_var,
+            variable=form.backup_interval_checkbox_var,
             command="enable_backup_interval"
         )
         backup_interval_checkbox.grid(column=0, row=3)
@@ -143,8 +145,8 @@ class Interface:
             text="Backup Server Interval (hours):"
         )
         backup_interval_label.grid(column=1, row=3, sticky=W)
-        config_object.backup_interval_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
-        config_object.backup_interval_entry.grid(column=2, row=3, sticky=W)
+        form.backup_interval_entry = ttk.Entry(main_interval_frame, width=self.entry_width)
+        form.backup_interval_entry.grid(column=2, row=3, sticky=W)
 
 
     def config_optional_config_in_main_tab(self):
@@ -490,24 +492,17 @@ class Interface:
         scrollbar.pack(side="right", fill="y")
 
         # text widget for the output
-        self.output_text = Text(
+        form.output_text = Text(
             output_frame,
             wrap="word",
             height=10,
             width=85,
             yscrollcommand=scrollbar.set
         )
-        self.output_text.pack(padx=10, pady=10, expand=True, fill="both")
+        form.output_text.pack(padx=10, pady=10, expand=True, fill="both")
 
-        scrollbar.config(command=self.output_text.yview)
+        scrollbar.config(command=form.output_text.yview)
 
-
-    def append_to_output(self, message):
-        """Function that sends message to output window"""
-        timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
-        formatted_message = timestamp + message
-        self.output_text.insert("end", formatted_message + "\n")
-        self.output_text.yview("end")  # Auto-scroll to the bottom
 
     def set_exit_conditions(self):
         """Sets the exit conditions for the root window"""
