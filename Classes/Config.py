@@ -5,10 +5,10 @@ class Config:
     def __init__(self):
         self.config_directory = self.get_or_create_config_directory()
         self.config_file_path= os.path.join(self.config_directory, "config.json")
-        
+
         self.arrcon_exe_path = '../ARRCON/ARRCON.exe'
         self.palworld_directory = None
-        
+
         self.rcon_getport = None # rcon_port.cget("text")
         self.rcon_pass = None # re.search(r'AdminPassword="([^"]*)",', file_content).group(1)
         self.server_start_args = None # server_start_args_entry.get()
