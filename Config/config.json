@@ -1,0 +1,15 @@
+{
+    "restartEntry": "",
+    "restartScheduleEntry": "",
+    "ampm_var": "AM",
+    "monitorEntry": "",
+    "server_directory_selection": "No directory selected",
+    "arrcon_directory_selection": "No directory selected",
+    "steamcmd_directory_selection": "No directory selected",
+    "backup_directory_selection": "No directory selected",
+    "server_start_args_entry": "-useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -EpicApp=PalServer",
+    "email_address_entry": "",
+    "discordEntry": "",
+    "smtp_server_entry": "smtp.gmail.com",
+    "smtp_port_entry": "587"
+}
