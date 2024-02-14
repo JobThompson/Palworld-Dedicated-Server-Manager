@@ -5,7 +5,7 @@ class Config:
     def __init__(self):
         self.config_directory = self.get_or_create_config_directory()
         self.config_file_path= os.path.join(self.config_directory, "config.json")
-        
+
         self.restart_entry = None
         self.restart_schedule_entry = None
         self.monitor_interval_checkbox_var = None
@@ -22,15 +22,15 @@ class Config:
         self.discord_entry = None
         self.smtp_server_entry = None
         self.smtp_port_entry = None
-        
+
         # self.load_config()
-        
+
     def get_or_create_config_directory(self):
         config_directory = os.path.join("./", "Config")
         if not os.path.exists(config_directory):
             os.makedirs(config_directory)
         return config_directory
-    
+
     def save_config(self):
         try:
             settings = {
@@ -57,17 +57,17 @@ class Config:
             print("Error saving settings: " + str(e))
         except IOError as e:
             print("Error saving settings: " + str(e))
-            
+
     def load_config(self):
         try:
             with open(self.config_file_path, "r", encoding="utf-8") as file:
                 config = json.load(file)
-                self.restart_entry.insert(0, config.get("restart_entry", ""))
-                self.restart_schedule_entry.insert(0, config.get("restart_schedule_entry", ""))
-                self.monitor_interval_checkbox_var.insert(False, "monitor_interval_checkbox_var")
-                self.ampm_var.set(config.get("ampm_var", "AM"))
-                self.monitor_entry.insert(0, config.get("monitor_entry", ""))
-                self.backup_interval_entry.insert(0, config.get("backup_interval_entry", ""))
+                # self.restart_entry.insert(0, config.get("restart_entry", ""))
+                # self.restart_schedule_entry.insert(0, config.get("restart_schedule_entry", ""))
+                # self.monitor_interval_checkbox_var.insert(False, "monitor_interval_checkbox_var")
+                # self.ampm_var.set(config.get("ampm_var", "AM"))
+                # self.monitor_entry.insert(0, config.get("monitor_entry", ""))
+                # self.backup_interval_entry.insert(0, config.get("backup_interval_entry", ""))
                 # server_directory_selection.config(text=config.get("server_directory_selection", "No directory selected"))
                 # arrcon_directory_selection.config(text=config.get("arrcon_directory_selection", "No directory selected"))
                 # steamcmd_directory_selection.config(text=config.get("steamcmd_directory_selection", "No directory selected"))
