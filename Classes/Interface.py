@@ -102,13 +102,13 @@ class Interface:
             text="Daily Server Restart Time (12-hour Format):"
         )
         restart_schedule_label.grid(column=1, row=1, sticky=W)
-        form.restart_schedule_entry = StringVar()
-        restart_schedule_entry = ttk.Entry(
+        form.restart_schedule_entry_var = StringVar()
+        form.restart_schedule_entry = ttk.Entry(
             main_interval_frame,
-            textvariable=form.restart_schedule_entry,
+            textvariable=form.restart_schedule_entry_var,
             width=self.entry_width
         )
-        restart_schedule_entry.grid(column=2, row=1, sticky=W)
+        form.restart_schedule_entry.grid(column=2, row=1, sticky=W)
         form.ampm_var = StringVar(value="AM")
         ampm_combobox = ttk.Combobox(
             main_interval_frame,
@@ -155,10 +155,10 @@ class Interface:
         self.optional_config_frame = LabelFrame(self.main_tab, text="Optional Configurations")
         self.optional_config_frame.grid(column=0, row=1, padx=10, pady=10, sticky=(N, W, E, S))
 
-        send_email_checkbox_var = BooleanVar()
+        form.send_email_checkbox_var = BooleanVar()
         send_email_checkbox = ttk.Checkbutton(
             self.optional_config_frame,
-            variable=send_email_checkbox_var,
+            variable=form.send_email_checkbox_var,
             command="enable_send_email"
         )
         send_email_checkbox.grid(column=0, row=0)
@@ -168,10 +168,10 @@ class Interface:
         )
         send_email_label.grid(column=1, row=0, sticky=W)
 
-        discord_webhook_checkbox_var = BooleanVar()
+        form.discord_webhook_checkbox_var = BooleanVar()
         discord_webhook_checkbox = ttk.Checkbutton(
             self.optional_config_frame,
-            variable=discord_webhook_checkbox_var,
+            variable=form.discord_webhook_checkbox_var,
             command="enable_send_discord_message"
         )
         discord_webhook_checkbox.grid(column=0, row=1)
@@ -181,10 +181,10 @@ class Interface:
         )
         discord_webhook_label.grid(column=1, row=1, sticky=W)
 
-        update_server_startup_checkbox_var = BooleanVar()
+        form.update_server_startup_checkbox_var = BooleanVar()
         update_server_startup_checkbox = ttk.Checkbutton(
             self.optional_config_frame,
-            variable=update_server_startup_checkbox_var,
+            variable=form.update_server_startup_checkbox_var,
             command="enable_server_updates_on_startup"
         )
         update_server_startup_checkbox.grid(column=0, row=2)
@@ -194,10 +194,10 @@ class Interface:
         )
         update_server_startup_label.grid(column=1, row=2, sticky=W)
 
-        backup_server_checkbox_var = BooleanVar()
+        form.backup_server_checkbox_var = BooleanVar()
         backup_server_checkbox = ttk.Checkbutton(
             self.optional_config_frame,
-            variable=backup_server_checkbox_var,
+            variable=form.backup_server_checkbox_var,
             command="enable_server_backups"
         )
         backup_server_checkbox.grid(column=0, row=3)
@@ -207,10 +207,10 @@ class Interface:
         )
         backup_server_label.grid(column=1, row=3, sticky=W)
 
-        delete_old_backups_checkbox_var = BooleanVar()
+        form.delete_old_backups_checkbox_var = BooleanVar()
         delete_old_backups_checkbox = ttk.Checkbutton(
             self.optional_config_frame,
-            variable=delete_old_backups_checkbox_var,
+            variable=form.delete_old_backups_checkbox_var,
             command="enable_delete_backups"
         )
         delete_old_backups_checkbox.grid(column=0, row=4)
@@ -219,8 +219,8 @@ class Interface:
             text="Delete Backups Older Than (Days):"
         )
         delete_old_backups_label.grid(column=1, row=4, sticky=W)
-        delete_old_backups_entry = ttk.Entry(self.optional_config_frame, width=self.entry_width)
-        delete_old_backups_entry.grid(column=2, row=4, sticky=W)
+        form.delete_old_backups_entry = ttk.Entry(self.optional_config_frame, width=self.entry_width)
+        form.delete_old_backups_entry.grid(column=2, row=4, sticky=W)
 
 
     def config_server_functions_in_main_tab(self):
@@ -281,58 +281,58 @@ class Interface:
         server_info_frame = LabelFrame(self.server_config_tab, text="PalWorldSettings.ini")
         server_info_frame.grid(column=0, row=0, padx=10, pady=10)
 
-        server_name_label = ttk.Label(server_info_frame, text="Server Name:")
-        server_name_label.grid(column=0, row=0, sticky=W, padx=10)
+        form.server_name_label = ttk.Label(server_info_frame, text="Server Name:")
+        form.server_name_label.grid(column=0, row=0, sticky=W, padx=10)
 
-        server_name = ttk.Label(server_info_frame, text="-")
-        server_name.grid(column=0, row=1, sticky=W, padx=10)
+        form.server_name = ttk.Label(server_info_frame, text="-")
+        form.server_name.grid(column=0, row=1, sticky=W, padx=10)
 
-        server_description_label = ttk.Label(server_info_frame, text="Server Description:")
-        server_description_label.grid(column=0, row=2, sticky=W, padx=10)
+        form.server_description_label = ttk.Label(server_info_frame, text="Server Description:")
+        form.server_description_label.grid(column=0, row=2, sticky=W, padx=10)
 
-        server_description = ttk.Label(server_info_frame, text="-")
-        server_description.grid(column=0, row=3, sticky=W, padx=10)
+        form.server_description = ttk.Label(server_info_frame, text="-")
+        form.server_description.grid(column=0, row=3, sticky=W, padx=10)
 
-        server_password_label = ttk.Label(server_info_frame, text="Server Password:")
-        server_password_label.grid(column=0, row=4, sticky=W, padx=10)
+        form.server_password_label = ttk.Label(server_info_frame, text="Server Password:")
+        form.server_password_label.grid(column=0, row=4, sticky=W, padx=10)
 
-        server_password = ttk.Label(server_info_frame, text="-")
-        server_password.grid(column=0, row=5, sticky=W, padx=10)
+        form.server_password = ttk.Label(server_info_frame, text="-")
+        form.server_password.grid(column=0, row=5, sticky=W, padx=10)
 
-        max_players_label = ttk.Label(server_info_frame, text="Max Players:")
-        max_players_label.grid(column=1, row=0, sticky=W, padx=10)
+        form.max_players_label = ttk.Label(server_info_frame, text="Max Players:")
+        form.max_players_label.grid(column=1, row=0, sticky=W, padx=10)
 
-        max_players = ttk.Label(server_info_frame, text="-")
-        max_players.grid(column=1, row=1, sticky=W, padx=10)
+        form.max_players = ttk.Label(server_info_frame, text="-")
+        form.max_players.grid(column=1, row=1, sticky=W, padx=10)
 
-        server_port_label = ttk.Label(server_info_frame, text="Server Port:")
-        server_port_label.grid(column=1, row=2, sticky=W, padx=10)
+        form.server_port_label = ttk.Label(server_info_frame, text="Server Port:")
+        form.server_port_label.grid(column=1, row=2, sticky=W, padx=10)
 
-        server_port = ttk.Label(server_info_frame, text="-")
-        server_port.grid(column=1, row=3, sticky=W, padx=10)
+        form.server_port = ttk.Label(server_info_frame, text="-")
+        form.server_port.grid(column=1, row=3, sticky=W, padx=10)
 
-        rcon_port_label = ttk.Label(server_info_frame, text="RCON Port:")
-        rcon_port_label.grid(column=2, row=0, sticky=W, padx=10)
+        form.rcon_port_label = ttk.Label(server_info_frame, text="RCON Port:")
+        form.rcon_port_label.grid(column=2, row=0, sticky=W, padx=10)
 
-        rcon_port = ttk.Label(server_info_frame, text="-")
-        rcon_port.grid(column=2, row=1, sticky=W, padx=10)
+        form.rcon_port = ttk.Label(server_info_frame, text="-")
+        form.rcon_port.grid(column=2, row=1, sticky=W, padx=10)
 
-        rcon_state_label = ttk.Label(server_info_frame, text="RCON Enabled:")
-        rcon_state_label.grid(column=2, row=2, sticky=W, padx=10)
+        form.rcon_state_label = ttk.Label(server_info_frame, text="RCON Enabled:")
+        form.rcon_state_label.grid(column=2, row=2, sticky=W, padx=10)
 
-        rcon_state = ttk.Label(server_info_frame, text="-")
-        rcon_state.grid(column=2, row=3, sticky=W, padx=10)
+        form.rcon_state = ttk.Label(server_info_frame, text="-")
+        form.rcon_state.grid(column=2, row=3, sticky=W, padx=10)
 
-        rcon_password_label = ttk.Label(server_info_frame, text="RCON Password:")
-        rcon_password_label.grid(column=2, row=4, sticky=W, padx=10)
+        form.rcon_password_label = ttk.Label(server_info_frame, text="RCON Password:")
+        form.rcon_password_label.grid(column=2, row=4, sticky=W, padx=10)
 
-        rcon_password = ttk.Label(server_info_frame, text="-")
-        rcon_password.grid(column=2, row=5, sticky=W, padx=10)
+        form.rcon_password = ttk.Label(server_info_frame, text="-")
+        form.rcon_password.grid(column=2, row=5, sticky=W, padx=10)
 
         edit_server_config_button = ttk.Button(
             server_info_frame, 
             text="Edit PalWorldSettings.ini", 
-            command="lambda: open_ini_file(server_directory_selection.cget('text'))"
+            command=lambda: form.open_ini_file(form.server_directory_selection.cget('text'))
         )
         edit_server_config_button.grid(column=0, row=6, columnspan=3, padx=10, pady=10)
     
@@ -344,11 +344,11 @@ class Interface:
         server_directory_button = ttk.Button(server_config_frame, text="Select Palworld Directory:", command="select_palworld_directory")
         server_directory_button.grid(column=0, row=0, padx=10, pady=10)
 
-        server_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-        server_directory_selection.grid(column=1, row=0, sticky=W)
+        form.server_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        form.server_directory_selection.grid(column=1, row=0, sticky=W)
 
-        palworld_exe_result_label = ttk.Label(server_config_frame)
-        palworld_exe_result_label.grid(column=2, row=0)
+        form.palworld_exe_result_label = ttk.Label(server_config_frame)
+        form.palworld_exe_result_label.grid(column=2, row=0)
 
         arrcon_directory_button = ttk.Button(server_config_frame, text="Select ARRCON Directory:", command="select_arrcon_directory")
         arrcon_directory_button.grid(column=0, row=1, padx=10, pady=10)
@@ -356,8 +356,8 @@ class Interface:
         arrcon_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
         arrcon_directory_selection.grid(column=1, row=1, sticky=W)
 
-        arrcon_exe_result_label = ttk.Label(server_config_frame)
-        arrcon_exe_result_label.grid(column=2, row=1)
+        form.arrcon_exe_result_label = ttk.Label(server_config_frame)
+        form.arrcon_exe_result_label.grid(column=2, row=1)
 
         steamcmd_directory_button = ttk.Button(server_config_frame, text="Select steamcmd Directory:", command="select_steamcmd_directory")
         steamcmd_directory_button.grid(column=0, row=2, padx=10, pady=10)
@@ -365,8 +365,8 @@ class Interface:
         steamcmd_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
         steamcmd_directory_selection.grid(column=1, row=2, sticky=W)
 
-        steamcmd_exe_result_label = ttk.Label(server_config_frame)
-        steamcmd_exe_result_label.grid(column=2, row=2)
+        form.steamcmd_exe_result_label = ttk.Label(server_config_frame)
+        form.steamcmd_exe_result_label.grid(column=2, row=2)
 
         backup_directory_button = ttk.Button(server_config_frame, text="Select Backup Directory:", command="select_backup_directory")
         backup_directory_button.grid(column=0, row=3, padx=10, pady=10)
@@ -377,8 +377,8 @@ class Interface:
         server_start_args_label = ttk.Label(server_config_frame, text="Server Startup Arguments:")
         server_start_args_label.grid(column=0, row=4, padx=10, pady=10)
 
-        server_start_args_entry = ttk.Entry(server_config_frame, width=100)
-        server_start_args_entry.grid(column=1, row=4, columnspan=2, sticky=W)
+        form.server_start_args_entry = ttk.Entry(server_config_frame, width=100)
+        form.server_start_args_entry.grid(column=1, row=4, columnspan=2, sticky=W)
 
 
     """ Alert Tab Configuration """
@@ -390,26 +390,26 @@ class Interface:
         email_address_label = ttk.Label(email_config_frame, text="Email Address:")
         email_address_label.grid(column=0, row=0, padx=10, sticky=W)
 
-        email_address_entry = ttk.Entry(email_config_frame, width=35)
-        email_address_entry.grid(column=1, row=0, sticky=W)
+        form.email_address_entry = ttk.Entry(email_config_frame, width=35)
+        form.email_address_entry.grid(column=1, row=0, sticky=W)
 
         email_password_label = ttk.Label(email_config_frame, text="Email Password:")
         email_password_label.grid(column=0, row=1, padx=10, sticky=W)
 
-        email_password_entry = ttk.Entry(email_config_frame, show="*", width=35)
-        email_password_entry.grid(column=1, row=1, sticky=W)
+        form.email_password_entry = ttk.Entry(email_config_frame, show="*", width=35)
+        form.email_password_entry.grid(column=1, row=1, sticky=W)
 
         smtp_server_label = ttk.Label(email_config_frame, text="SMTP Server:")
         smtp_server_label.grid(column=0, row=2, padx=10, sticky=W)
 
-        smtp_server_entry = ttk.Entry(email_config_frame)
-        smtp_server_entry.grid(column=1, row=2, sticky=W)
+        form.smtp_server_entry = ttk.Entry(email_config_frame)
+        form.smtp_server_entry.grid(column=1, row=2, sticky=W)
 
         smtp_port_label = ttk.Label(email_config_frame, text="SMTP Port:")
         smtp_port_label.grid(column=0, row=3, padx=10, sticky=W)
 
-        smtp_port_entry = ttk.Entry(email_config_frame, width=5)
-        smtp_port_entry.grid(column=1, row=3, sticky=W)
+        form.smtp_port_entry = ttk.Entry(email_config_frame, width=5)
+        form.smtp_port_entry.grid(column=1, row=3, sticky=W)
 
     def configure_discord_configuration_in_alerts_tab(self):
         """Configures the discord configuration section of the alerts tab"""
@@ -419,8 +419,8 @@ class Interface:
         discord_label = ttk.Label(discord_frame, text="Discord Webhook URL:")
         discord_label.grid(column=0, row=0, padx=10)
 
-        discord_entry = ttk.Entry(discord_frame, width=35)
-        discord_entry.grid(column=1, row=0)
+        form.discord_entry = ttk.Entry(discord_frame, width=35)
+        form.discord_entry.grid(column=1, row=0)
 
         discord_test_button = ttk.Button(discord_frame, text="Send Test Message", command=discord_handler.post_discord_message)
         discord_test_button.grid(column=0, row=1, columnspan=2, pady=2)
@@ -511,7 +511,11 @@ class Interface:
 
     def on_closing(self):
         """Handles the closing of the window and saves the config file before closing the window"""
-        config_object.save_config()
+        try:
+            config_object.save_config()
+        except IOError as e:
+            form.append_to_output("Error saving config file: " + str(e))
+        
         self.root.destroy()
 
     def run(self):

@@ -33,23 +33,26 @@ class Config:
 
     def save_config(self):
         try:
-            settings = {
+            settings = {                
                 "restart_entry": form.restart_entry.get(),
                 "restart_schedule_entry": form.restart_schedule_entry.get(),
-                "monitor_interval_checkbox_var": form.monitor_interval_checkbox_var.get(),
                 "ampm_var": form.ampm_var.get(),
+                "monitor_interval_checkbox_var": form.monitor_interval_checkbox_var.get(),
                 "monitor_entry": form.monitor_entry.get(),
+                "backup_interval_checkbox_var": form.backup_interval_checkbox_var.get(),
                 "backup_interval_entry": form.backup_interval_entry.get(),
-                # "server_directory_selection": form.server_directory_selection.cget("text"),
-                # "arrcon_directory_selection": form.arrcon_directory_selection.cget("text"),
-                # "steamcmd_directory_selection": form.steamcmd_directory_selection.cget("text"),
-                # "backup_directory_selection": form.backup_directory_selection.cget("text"),
-                # "server_start_args_entry": form.server_start_args_entry.get(),
-                # "send_email_checkbox": form.send_email_checkbox.get(),
-                # "email_address_entry": form.email_address_entry.get(),
-                # "discord_entry": form.discord_entry.get(),
-                # "smtp_server_entry": form.smtp_server_entry.get(),
-                # "smtp_port_entry": form.smtp_port_entry.get()
+                "send_email_checkbox_var": form.send_email_checkbox_var.get(),
+                "discord_webhook_checkbox_var": form.discord_webhook_checkbox_var.get(),
+                "update_server_startup_checkbox_var": form.update_server_startup_checkbox_var.get(),
+                "backup_server_checkbox_var": form.backup_server_checkbox_var.get(),
+                "delete_old_backups_checkbox_var": form.delete_old_backups_checkbox_var.get(),
+                "delete_old_backups_entry": form.delete_old_backups_entry.get(),
+                "server_directory_selection": form.server_directory_selection.cget("text"),
+                "server_start_args_entry": form.server_start_args_entry.get(),
+                "email_address_entry": form.email_address_entry.get(),
+                "email_password_entry": form.email_password_entry.get(),
+                "smtp_server_entry": form.smtp_server_entry.get(),
+                "discord_entry": form.discord_entry.get(),
             }
             with open(self.config_file_path, "w", encoding="utf-8") as file:
                 json.dump(settings, file)
