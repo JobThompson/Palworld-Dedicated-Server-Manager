@@ -26,12 +26,14 @@ class Config:
         # self.load_config()
 
     def get_or_create_config_directory(self):
+        """Returns the path to the config directory, creating it if it doesn't exist."""
         config_directory = os.path.join("./", "Config")
         if not os.path.exists(config_directory):
             os.makedirs(config_directory)
         return config_directory
 
     def save_config(self):
+        """Saves the current configuration to a file."""
         try:
             settings = {                
                 "restart_entry": form.restart_entry.get(),

@@ -72,9 +72,9 @@ def load_settings():
         smtp_port_entry.insert(0, "587")
 
 #Save settings when exiting app
-def on_exit():
-    save_settings()
-    root.destroy()
+# def on_exit():
+#     save_settings()
+#     root.destroy()
 
 #commands used to save palworld server.
 arrcon_command_save_server = None
@@ -98,31 +98,31 @@ monitor_after_id = None
 current_function = None
 scheduled_time = None
 
-def update_commands():
-    global arrcon_command_save_server, arrcon_command_shutdown_server, arrcon_command_server_message_30, arrcon_command_server_message_10, start_server_command, shutdown_server_command, rcon_pass, force_shutdown_server_command, arrcon_command_info_server
-    try:
-        arrcon_exe_path = f'{arrcon_directory_selection.cget("text")}/ARRCON.exe'
-        rcon_getport = rcon_port.cget("text")
-        palworld_directory = server_directory_selection.cget("text")
-        server_start_args = server_start_args_entry.get()
-        arrcon_command_save_server = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "save"'
-        arrcon_command_info_server = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "info"'
-        arrcon_command_shutdown_server = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "shutdown 60 The_server_will_be_restarting_in_60_seconds"'
-        arrcon_command_server_message_30 = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "broadcast The_server_will_be_restarting_in_30_seconds"'
-        arrcon_command_server_message_10 = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "broadcast The_server_will_be_restarting_in_10_seconds"'
-        start_server_command = f'{palworld_directory}/PalServer.exe {server_start_args}'
-        shutdown_server_command = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "shutdown 5 The_server_will_be_shutting_down_in_5_seconds"'
-        force_shutdown_server_command = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "doexit"'
-        return "commands updated"
-    except Exception as e:
-        append_to_output(f"There was an issue creating the ARRCON commands and server startup command. Error: " + str(e))
+# def update_commands():
+#     global arrcon_command_save_server, arrcon_command_shutdown_server, arrcon_command_server_message_30, arrcon_command_server_message_10, start_server_command, shutdown_server_command, rcon_pass, force_shutdown_server_command, arrcon_command_info_server
+#     try:
+#         arrcon_exe_path = f'{arrcon_directory_selection.cget("text")}/ARRCON.exe'
+#         rcon_getport = rcon_port.cget("text")
+#         palworld_directory = server_directory_selection.cget("text")
+#         server_start_args = server_start_args_entry.get()
+#         arrcon_command_save_server = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "save"'
+#         arrcon_command_info_server = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "info"'
+#         arrcon_command_shutdown_server = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "shutdown 60 The_server_will_be_restarting_in_60_seconds"'
+#         arrcon_command_server_message_30 = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "broadcast The_server_will_be_restarting_in_30_seconds"'
+#         arrcon_command_server_message_10 = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "broadcast The_server_will_be_restarting_in_10_seconds"'
+#         start_server_command = f'{palworld_directory}/PalServer.exe {server_start_args}'
+#         shutdown_server_command = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "shutdown 5 The_server_will_be_shutting_down_in_5_seconds"'
+#         force_shutdown_server_command = f'{arrcon_exe_path} -H 127.0.0.1 -P {rcon_getport} -p {rcon_pass} "doexit"'
+#         return "commands updated"
+#     except Exception as e:
+#         append_to_output(f"There was an issue creating the ARRCON commands and server startup command. Error: " + str(e))
 
 # Function that sends message to output window
-def append_to_output(message):
-    timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S] ")
-    formatted_message = timestamp + message
-    output_text.insert(tk.END, formatted_message + "\n")
-    output_text.yview(tk.END)  # Auto-scroll to the bottom
+# def append_to_output(message):
+#     timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S] ")
+#     formatted_message = timestamp + message
+#     output_text.insert(tk.END, formatted_message + "\n")
+#     output_text.yview(tk.END)  # Auto-scroll to the bottom
 
 def server_status_info():
     task_name = "PalServer-Win64-Test-Cmd.exe"
@@ -177,26 +177,26 @@ def server_status_info():
         server_version_state_label.config(text="?")
         root.after(60000, server_status_info)
 
-def save_server():
-    append_to_output("Saving Palworld Server...")
-    root.update()
-    try:
-        subprocess.Popen(arrcon_command_save_server)
-        append_to_output("Palworld server was saved successfully...")
-    except Exception as e:
-        append_to_output(f"Couldn't save the server due to error: " + str(e))
+# def save_server():
+#     append_to_output("Saving Palworld Server...")
+#     root.update()
+#     try:
+#         subprocess.Popen(arrcon_command_save_server)
+#         append_to_output("Palworld server was saved successfully...")
+#     except Exception as e:
+#         append_to_output(f"Couldn't save the server due to error: " + str(e))
 
-def shutdown_server(type):
-    if type == "graceful":
-        try:
-            subprocess.Popen(shutdown_server_command)
-        except Exception as e:
-            append_to_output(f"Couldn't shutdown the server due to error: " + str(e))
-    if type == "force":
-        try:
-            subprocess.Popen(force_shutdown_server_command)
-        except Exception as e:
-            append_to_output(f"Couldn't shutdown the server due to error: " + str(e))
+# def shutdown_server(type):
+#     if type == "graceful":
+#         try:
+#             subprocess.Popen(shutdown_server_command)
+#         except Exception as e:
+#             append_to_output(f"Couldn't shutdown the server due to error: " + str(e))
+#     if type == "force":
+#         try:
+#             subprocess.Popen(force_shutdown_server_command)
+#         except Exception as e:
+#             append_to_output(f"Couldn't shutdown the server due to error: " + str(e))
 
 # Function to save the server during the restart interval
 def save_server_interval(restartinterval):

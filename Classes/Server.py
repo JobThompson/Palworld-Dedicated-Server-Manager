@@ -1,12 +1,11 @@
 from Classes.Form import form
+import subprocess
 
 class Server:
     """Server class to store server information and operate on server data"""
-    def __init__(self, name, ip, port):
+    def __init__(self, name, interface):
         self.name = name
-        self.ip = ip
-        self.port = port
-        self.status = "offline"
+        self.interface = interface
         
         self.rcon_pass = ''
         self.arrcon_exe_path = '../ARRCON/ARRCON.exe'
@@ -53,4 +52,28 @@ class Server:
                 return f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_port} -p {self.rcon_pass} "shutdown 5 The_server_will_be_shutting_down_in_5_seconds"'
             case "force_shutdown":
                 return f'{self.arrcon_exe_path} -H 127.0.0.1 -P {self.rcon_port} -p {self.rcon_pass} "doexit"'
+            case _:
+                return "Invalid command"
 
+    def save_server(self):
+        """Saves the Palworld server"""
+        form.append_to_output("Saving Palworld Server...")
+        self.interface.root.update()
+        try:
+            subprocess.Popen(self.get_arrcon_command("save"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            form.append_to_output("Palworld server was saved successfully...")
+        except subprocess.CalledProcessError as e:
+            form.append_to_output(f"Couldn't save the server due to error: {str(e)}")
+
+    def shutdown_server(self, shutdown_type):
+        """Shuts down the Palworld server"""
+        if shutdown_type == "graceful":
+            try:
+                subprocess.Popen(self.get_arrcon_command("shutdown"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError as e:
+                form.append_to_output(f"Couldn't shutdown the server due to error: {str(e)}")
+        if shutdown_type == "force":
+            try:
+                subprocess.Popen(self.get_arrcon_command("force_shutdown"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError as e:
+                form.append_to_output(f"Couldn't shutdown the server due to error: {str(e)}")
