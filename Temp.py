@@ -250,35 +250,35 @@ def scheduled_shutdown_server():
         current_function = ""
         append_to_output(f"Couldn't shutdown the server due to error: " + str(e))
 
-def message_server_30(restartinterval):
-    global after_id, current_function, scheduled_time
-    current_function = "message_server_30"
-    subprocess.Popen(arrcon_command_server_message_30)
-    after_id = root.after(20000, lambda: message_server_10(restartinterval))
+# def message_server_30(restartinterval):
+#     global after_id, current_function, scheduled_time
+#     current_function = "message_server_30"
+#     subprocess.Popen(arrcon_command_server_message_30)
+#     after_id = root.after(20000, lambda: message_server_10(restartinterval))
 
-def scheduled_message_server_30():
-    global after_id, current_function, scheduled_time
-    current_function = "message_server_30"
-    subprocess.Popen(arrcon_command_server_message_30)
-    after_id = root.after(20000, scheduled_message_server_10)
+# def scheduled_message_server_30():
+#     global after_id, current_function, scheduled_time
+#     current_function = "message_server_30"
+#     subprocess.Popen(arrcon_command_server_message_30)
+#     after_id = root.after(20000, scheduled_message_server_10)
 
-def message_server_10(restartinterval):
-    global after_id, current_function, scheduled_time
-    current_function = "message_server_10"
-    try:
-        subprocess.Popen(arrcon_command_server_message_10)
-    except Exception as e:
-        append_to_output(f"Couldn't send message to the server due to error: " + str(e))
-    after_id = root.after(20000, lambda: restart_server(restartinterval))
+# def message_server_10(restartinterval):
+#     global after_id, current_function, scheduled_time
+#     current_function = "message_server_10"
+#     try:
+#         subprocess.Popen(arrcon_command_server_message_10)
+#     except Exception as e:
+#         append_to_output(f"Couldn't send message to the server due to error: " + str(e))
+#     after_id = root.after(20000, lambda: restart_server(restartinterval))
 
-def scheduled_message_server_10():
-    global after_id, current_function, scheduled_time
-    current_function = "message_server_10"
-    try:
-        subprocess.Popen(arrcon_command_server_message_10)
-        after_id = root.after(20000, scheduled_restart_server)
-    except Exception as e:
-        append_to_output(f"Couldn't send message to the server due to error: " + str(e))
+# def scheduled_message_server_10():
+#     global after_id, current_function, scheduled_time
+#     current_function = "message_server_10"
+#     try:
+#         subprocess.Popen(arrcon_command_server_message_10)
+#         after_id = root.after(20000, scheduled_restart_server)
+#     except Exception as e:
+#         append_to_output(f"Couldn't send message to the server due to error: " + str(e))
 
 def restart_server(restartinterval):
     global after_id, current_function, scheduled_time
@@ -486,15 +486,15 @@ def kill_palworld_process():
     else:
         append_to_output("PalServer.exe is not running. The server is completely shutdown")
 
-def check_palworld_process():
-    task_name = "PalServer-Win64-Test-Cmd.exe"
+# def check_palworld_process():
+#     task_name = "PalServer-Win64-Test-Cmd.exe"
 
-    # Get the list of running processes
-    running_processes = [proc.name() for proc in psutil.process_iter()]
+#     # Get the list of running processes
+#     running_processes = [proc.name() for proc in psutil.process_iter()]
 
-    # Check if the process is in the list
-    if task_name in running_processes:
-        append_to_output("Server is now running")
+#     # Check if the process is in the list
+#     if task_name in running_processes:
+#         append_to_output("Server is now running")
 
 def send_email():
     email_from = email_address_entry.get()

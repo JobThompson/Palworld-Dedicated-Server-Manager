@@ -26,15 +26,12 @@ class EmailHandler:
         """Send the email to the given email address"""
         try:
             server = smtplib.SMTP(self.smtp_server, self.smtp_port)
-            server.starttls()
-
-            # Login to the email account
-            server.login(self.smtp_user, self.smtp_password)
-
-            # Send the email
-            server.sendmail(self.smtp_user, email_to, msg)
-
+            server.starttls() # Start the TLS encryption
+            server.login(self.smtp_user, self.smtp_password) # Login to the email account
+            server.sendmail(self.smtp_user, email_to, msg) # Send the email
             form.append_to_output("Sent notification email successfully.")
 
         except smtplib.SMTPException:
             pass
+        
+email_handler = EmailHandler()

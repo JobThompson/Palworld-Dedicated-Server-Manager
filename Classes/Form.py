@@ -10,6 +10,7 @@ class Form:
         self.ampm_var = None
         self.monitor_interval_checkbox_var = None
         self.monitor_entry = None
+        self.enable_backups_checkbox_var = None
         self.backup_interval_checkbox_var = None
         self.backup_interval_entry = None
         self.send_email_checkbox_var = None
@@ -28,6 +29,7 @@ class Form:
         self.steamcmd_directory_selection = None
         self.backup_directory_selection = None
 
+        """Server Settings"""
         self.rcon_port = None
         self.rcon_state = None
         self.rcon_password = None
@@ -79,9 +81,6 @@ class Form:
         else:
             self.append_to_output("You need to select a valid directory first.")
             self.open_modal("Invalid Directory", "You need to select a valid directory first")
-            
-
-
 
 
 form = Form()

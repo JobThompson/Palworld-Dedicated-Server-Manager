@@ -1,13 +1,11 @@
+import re, psutil, subprocess, os, datetime, zipfile
 from Classes.Form import form
-import re
-import subprocess
-import os
+
+TASK_NAME = "PalServer-Win64-Test-Cmd.exe"
 
 class Server:
     """Server class to store server information and operate on server data"""
-    def __init__(self, name):
-        self.name = name
-        # self.interface = interface
+    def __init__(self):
         self.current_function = ""
         
         self.rcon_pass = ''
@@ -35,7 +33,12 @@ class Server:
         self.rcon_port = form.rcon_port.cget("text")
         self.palworld_directory = form.server_directory_selection.cget("text")
         self.server_start_args = form.server_start_args_entry.get()
-
+    
+    def check_palworld_process(self):
+        task_name = "PalServer-Win64-Test-Cmd.exe"
+        running_processes = [proc.name() for proc in psutil.process_iter()] # Get the list of running processes
+        form.append_to_output("Server is now running") if task_name in running_processes else form.append_to_output("Server is not running") # Notify if the server is running or not
+            
     def get_arrcon_command(self, command):
         """Returns the command to be executed based on the command passed in."""
         match command:
@@ -81,29 +84,29 @@ class Server:
             except subprocess.CalledProcessError as e:
                 form.append_to_output(f"Couldn't shutdown the server due to error: {str(e)}")
 
-    def message_server_30(self, restartinterval):
+    def message_server_30(self, root, restartinterval):
         self.current_function = "message_server_30"
         subprocess.Popen(self.get_arrcon_command("message_30"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # form.after_id = root.after(20000, lambda: self.message_server_10(restartinterval))
+        form.after_id = root.after(20000, lambda: self.message_server_10(root, restartinterval))
 
-    def scheduled_message_server_30(self):
+    def scheduled_message_server_30(self, root):
         self.current_function = "message_server_30"
         subprocess.Popen(self.get_arrcon_command("message_30"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # form.after_id = form.root.after(20000, self.scheduled_message_server_10)
+        form.after_id = root.after(20000, self.scheduled_message_server_10(root))
 
-    def message_server_10(self, restartinterval):
+    def message_server_10(self, root, restartinterval):
         self.current_function = "message_server_10"
         try:
             subprocess.Popen(self.get_arrcon_command("message_10"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         except Exception as e:
             form.append_to_output(f"Couldn't send message to the server due to error: " + str(e))
-        # form.after_id = root.after(20000, lambda: self.restart_server(restartinterval))
+        form.after_id = root.after(20000, lambda: self.restart_server(restartinterval))
 
-    def scheduled_message_server_10(self):
+    def scheduled_message_server_10(self, root):
         self.current_function = "message_server_10"
         try:
             subprocess.Popen(self.get_arrcon_command("message_10"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            # self.after_id = root.after(20000, self.scheduled_restart_server)
+            form.after_id = root.after(20000, self.scheduled_restart_server)
         except Exception as e:
             form.append_to_output(f"Couldn't send message to the server due to error: " + str(e))
         
@@ -243,5 +246,85 @@ class Server:
         form.server_description.config(text="-")
         form.server_password.config(text="-")
         form.server_port.config(text="-")
+        
+    def scheduled_restart_server(self, root):  # TODO: This can be used for both scheduled restarts and regular restarts.
+        self.current_function = "restart_server"
+        form.append_to_output("Palworld Server is shutdown. Checking for residual processes... Sometimes the server process gets stuck")
+        root.update()
+        
+        # if form.enable_backups == True:
+        #         self.backup_server()
+        
+        try:
+            task_info = [proc for proc in psutil.process_iter(['pid', 'name']) if proc.name() == TASK_NAME] # Get the list of running processes that match the process name
+            psutil.Process(task_info.info['pid']).terminate()
+            form.append_to_output("Server process was terminated successfully...")
+        except psutil.NoSuchProcess as e:
+            form.append_to_output(f"Couldn't terminate the server process due to error: {str(e)}")
+        except psutil.AccessDenied as e:
+            form.append_to_output(f"Couldn't terminate the server process due to error: {str(e)}")
+        except Exception as e:
+            form.append_to_output(f"Couldn't terminate the server process due to error: {str(e)}")
 
 
+    def backup_server(self):
+        if not form.palworld_exe_result_label.cget("text") == "PalServer.exe not found":
+            if not form.backup_directory_selection.cget("text") == "No directory selected":
+                palworld_directory = form.server_directory_selection.cget("text")
+                backup_dir = form.backup_directory_selection.cget("text")
+                source_dir = f"{palworld_directory}/Pal/Saved/SaveGames/0"
+
+                # Create the backup directory if it doesn't exist
+                os.makedirs(backup_dir, exist_ok=True)
+
+                # Get the current date and time
+                current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+                # Compose the backup file path
+                backup_file_path = os.path.join(backup_dir, f"palworld_backup_{current_datetime}.zip")
+
+                files_to_backup = []
+                for root, dirs, files in os.walk(source_dir):
+                    files_to_backup.extend(os.path.join(root, file) for file in files)
+
+                if files_to_backup:
+                    with zipfile.ZipFile(backup_file_path, 'w', zipfile.ZIP_DEFLATED) as zip_archive:
+                        for root, dirs, files in os.walk(source_dir):
+                            for file in files:
+                                file_path = os.path.join(root, file)
+                                arcname = os.path.relpath(file_path, source_dir)
+                                zip_archive.write(file_path, arcname=arcname)
+
+                # Print a message indicating the completion of the backup
+                form.append_to_output(f"Backup of {source_dir} completed at {backup_file_path}")
+                if form.delete_old_backups_checkbox_var.get():
+                    # self.delete_old_backups()
+                    pass
+                else:
+                    form.append_to_output("You must select a Backup Directory to use this function. Check your Server Config tab")
+                    form.open_modal("Invalid Directory", "You must select a valid Backup directory to use this function")
+            else:
+                form.append_to_output("You must select a valid Palworld Server Directory to use this function. Check your Server Config tab")
+                form.open_modal("Invalid Directory", "You must select a valid Palworld Server directory to use this function")
+                
+    def delete_old_backups(self):
+        current_time = datetime.datetime.now()
+        days_entry = int(form.delete_old_backups_entry.get())
+        form.append_to_output(str(days_entry))
+
+        days_ago = current_time - datetime.timedelta(days=days_entry)
+
+        backup_dir = form.backup_directory_selection.cget("text")
+
+        for filename in os.listdir(backup_dir):
+            if filename.startswith("palworld_backup_"):
+                filepath = os.path.join(backup_dir, filename)
+            
+                modification_time = datetime.datetime.fromtimestamp(os.path.getmtime(filepath))
+            
+                if modification_time < days_ago:
+                    os.remove(filepath)
+                    form.append_to_output(f"Old backup deleted: {filepath}")
+
+
+server = Server()
