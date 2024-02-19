@@ -4,9 +4,7 @@ from Classes.Server import Server
 
 def main():
     """Main function that runs the program"""
-    email_handler = EmailHandler()
-    main_window = Interface(email_handler=email_handler)
-    Server("Palworld", main_window)
+    main_window = Interface( server=Server("Palworld"), email_handler=EmailHandler())
     main_window.run()
 
 

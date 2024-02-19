@@ -5,8 +5,9 @@ from Classes.DiscordHandler import discord_handler
 
 class Interface:
     """Class that handles the TKinter interface for the server manager"""
-    def __init__(self, email_handler) -> None:
+    def __init__(self, server, email_handler) -> None:
         self.email_handler = email_handler
+        self.server = server
 
         self.root = Tk()
         self.mainframe = None
@@ -331,7 +332,7 @@ class Interface:
 
         edit_server_config_button = ttk.Button(
             server_info_frame, 
-            text="Edit PalWorldSettings.ini", 
+            text="Edit PalWorldSettings.ini",
             command=lambda: form.open_ini_file(form.server_directory_selection.cget('text'))
         )
         edit_server_config_button.grid(column=0, row=6, columnspan=3, padx=10, pady=10)
@@ -341,7 +342,7 @@ class Interface:
         server_config_frame = LabelFrame(self.server_config_tab, text="Server Configuration")
         server_config_frame.grid(column=0, row=1, padx=10, pady=10)
 
-        server_directory_button = ttk.Button(server_config_frame, text="Select Palworld Directory:", command="select_palworld_directory")
+        server_directory_button = ttk.Button(server_config_frame, text="Select Palworld Directory:", command=self.server.select_palworld_directory)
         server_directory_button.grid(column=0, row=0, padx=10, pady=10)
 
         form.server_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
@@ -350,29 +351,29 @@ class Interface:
         form.palworld_exe_result_label = ttk.Label(server_config_frame)
         form.palworld_exe_result_label.grid(column=2, row=0)
 
-        arrcon_directory_button = ttk.Button(server_config_frame, text="Select ARRCON Directory:", command="select_arrcon_directory")
+        arrcon_directory_button = ttk.Button(server_config_frame, text="Select ARRCON Directory:", command=self.server.select_arrcon_directory)
         arrcon_directory_button.grid(column=0, row=1, padx=10, pady=10)
 
-        arrcon_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-        arrcon_directory_selection.grid(column=1, row=1, sticky=W)
+        form.arrcon_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        form.arrcon_directory_selection.grid(column=1, row=1, sticky=W)
 
         form.arrcon_exe_result_label = ttk.Label(server_config_frame)
         form.arrcon_exe_result_label.grid(column=2, row=1)
 
-        steamcmd_directory_button = ttk.Button(server_config_frame, text="Select steamcmd Directory:", command="select_steamcmd_directory")
+        steamcmd_directory_button = ttk.Button(server_config_frame, text="Select steamcmd Directory:", command=self.server.select_steamcmd_directory)
         steamcmd_directory_button.grid(column=0, row=2, padx=10, pady=10)
 
-        steamcmd_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-        steamcmd_directory_selection.grid(column=1, row=2, sticky=W)
+        form.steamcmd_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        form.steamcmd_directory_selection.grid(column=1, row=2, sticky=W)
 
         form.steamcmd_exe_result_label = ttk.Label(server_config_frame)
         form.steamcmd_exe_result_label.grid(column=2, row=2)
 
-        backup_directory_button = ttk.Button(server_config_frame, text="Select Backup Directory:", command="select_backup_directory")
+        backup_directory_button = ttk.Button(server_config_frame, text="Select Backup Directory:", command=self.server.select_backup_directory)
         backup_directory_button.grid(column=0, row=3, padx=10, pady=10)
 
-        backup_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
-        backup_directory_selection.grid(column=1, row=3, sticky=W)
+        form.backup_directory_selection = ttk.Label(server_config_frame, text="No directory selected")
+        form.backup_directory_selection.grid(column=1, row=3, sticky=W)
 
         server_start_args_label = ttk.Label(server_config_frame, text="Server Startup Arguments:")
         server_start_args_label.grid(column=0, row=4, padx=10, pady=10)
