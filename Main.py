@@ -4,11 +4,10 @@ from Classes.Form import Form
 
 def main():
     """Main function that runs the program"""
-    form = Form()
-    config = Config(form)
+    config = Config()
+    form = Form(config)
     interface_instance = MainWindow(form)
     interface_instance.run()
 
 if __name__ == "__main__":
     main()
-    

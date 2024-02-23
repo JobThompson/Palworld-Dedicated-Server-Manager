@@ -3,6 +3,7 @@ from Classes.Interface.ServerInformation import ServerInformation
 from Classes.Interface.ServerConfiguration import ServerConfiguration
 from Classes.Interface.ServerFunctions import ServerFunctions
 from Classes.Interface.OutputWindow import OutputWindow
+from Classes.Interface.NotificationConfiguration import NotificationConfiguration
 from Classes.Interface.Tabs import Tabs
 
 
@@ -22,6 +23,8 @@ class MainWindow(CTk):
         self.create_server_info_widgets(form)
         self.create_server_config_widgets(form)
         self.create_server_function_widgets(form)
+        
+        self.create_notification_configuration_widgets(form)
         
     def create_output_window(self):
         """Create the output window for the main window."""
@@ -53,6 +56,13 @@ class MainWindow(CTk):
         self.server_function_frame = ServerFunctions(master=self.tabbed_view.tab("Server"))
         self.server_function_frame.grid(row=0, column=4, columnspan=1, rowspan=2, padx=20, pady=10, sticky="ne")
         self.server_function_frame.create_server_function_widgets(form)
-        
+    
+    def create_notification_configuration_widgets(self, form):
+        """Create the notification configuration widgets."""
+        form.write_output("Creating notification configuration widgets.")
+        self.notification_configuration_frame = NotificationConfiguration(master=self.tabbed_view.tab("Notification"))
+        self.notification_configuration_frame.grid(row=0, column=4, columnspan=1, rowspan=2, padx=20, pady=10, sticky="ne")
+        self.notification_configuration_frame.create_notification_configuration(form)
+    
     def run(self):
         self.mainloop()
