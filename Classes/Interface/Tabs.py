@@ -8,5 +8,4 @@ class Tabs(CTkTabview):
         self.height = 40
         self.add("Server")
         self.add("Notification")
-        self.add("Backup")
         self.add("About")
