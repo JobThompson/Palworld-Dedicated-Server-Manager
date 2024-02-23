@@ -24,17 +24,17 @@ class ServerInformation(CTkFrame):
         max_players.grid(row=5, column=0, padx=10, pady=(10, 0), sticky="w")
         
         # Column 1
-        form.server_status = CTkLabel(self, text="server_status", fg_color="transparent")
+        form.server_status = CTkLabel(self, text="Offline", fg_color="transparent", text_color="red", width=120)
         form.server_status.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="w")
-        form.server_version = CTkLabel(self, text="Server Version:", fg_color="transparent")
-        form.server_version.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="w")
-        form.server_name = CTkLabel(self, text="server_name", fg_color="transparent")
+        form.server_version = CTkLabel(self, text="0.0.0", fg_color="transparent", width=120)
+        form.server_version.grid(row=1, column=1, padx=10, pady=(10, 0), sticky="w")
+        form.server_name = CTkLabel(self, text="", fg_color="transparent", width=120)
         form.server_name.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="w")
-        form.server_description = CTkLabel(self, text="server_description", fg_color="transparent")
+        form.server_description = CTkLabel(self, text="", fg_color="transparent", width=180)
         form.server_description.grid(row=3, column=1, padx=10, pady=(10, 0), sticky="w")
-        form.server_password = CTkLabel(self, text="server_password", fg_color="transparent")
+        form.server_password = CTkLabel(self, text="", fg_color="transparent", width=120)
         form.server_password.grid(row=4, column=1, padx=10, pady=(10, 0), sticky="w")
-        form.max_players = CTkLabel(self, text="max_players", fg_color="transparent")
+        form.max_players = CTkLabel(self, text="", fg_color="transparent", width=120)
         form.max_players.grid(row=5, column=1, padx=10, pady=(10, 0), sticky="w")
         
         # Column 2
@@ -46,11 +46,11 @@ class ServerInformation(CTkFrame):
         server_rcon_password.grid(row=2, column=2, padx=10, pady=(10, 0), sticky="w")
         
         # Column 3
-        form.server_rcon_port = CTkLabel(self, text="server_RCON_port", fg_color="transparent")
+        form.server_rcon_port = CTkLabel(self, text="", fg_color="transparent", width=80)
         form.server_rcon_port.grid(row=0, column=3, padx=10, pady=(10, 0), sticky="w")
-        form.server_rcon_enabled = CTkLabel(self, text="server_RCON_enabled", fg_color="transparent")
+        form.server_rcon_enabled = CTkLabel(self, text="", fg_color="transparent", width=80)
         form.server_rcon_enabled.grid(row=1, column=3, padx=10, pady=(10, 0), sticky="w")
-        form.server_rcon_password = CTkLabel(self, text="server_RCON_password", fg_color="transparent")
+        form.server_rcon_password = CTkLabel(self, text="", fg_color="transparent", width=80)
         form.server_rcon_password.grid(row=2, column=3, padx=10, pady=(10, 0), sticky="w")
         
         # Bottom Row
